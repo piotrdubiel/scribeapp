@@ -1,2 +1,2 @@
-scribedroid
+scribeapp
 ===========
