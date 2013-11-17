@@ -1,0 +1,8 @@
+<android.inputmethodservice.KeyboardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/keyboard"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_weight=".50" />
+
+<!-- From: file:/Users/piotrekd/workspace/ScribeApp/client/src/main/res/layout/standard_keyboard.xml -->
