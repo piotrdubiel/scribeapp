@@ -20,7 +20,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Title for Latin keyboard -->
-    <string name="ime_name">ScribeDroid Input</string>
+    <string name="ime_name">ScribeApp Input</string>
 
     <!-- Symbols that are commonly considered word separators in this language -->
 
