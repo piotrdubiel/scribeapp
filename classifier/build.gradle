@@ -41,7 +41,6 @@ task buildNative(type: Exec) {
     if (System.env.NDK_ROOT != null) {
 	    def ndkBuild = new File(System.env.NDK_ROOT, 'ndk-build')
 		executable ndkBuild
-		executable "${ndkBuild}.cmd"
     }
 }
 
