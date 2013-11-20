@@ -95,6 +95,9 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		supportSymbolKeyboardView.setOnKeyboardActionListener(new SymbolProcessor());
 		supportSymbolKeyboardView.setKeyboard(new Keyboard(service, R.xml.symbols));
 
+        word_separators = inputView.getResources().getString(R.string.word_separators);
+        input_modes = inputView.getResources().getStringArray(R.array.input_modes);
+
 		// currentType = Classificator.ALPHA;
 		current_mode = 0;
 		typeSwitch.setText(input_modes[0]);
@@ -104,8 +107,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
 		gestureView.setFadeOffset(gestureInterval);
 
-        word_separators = inputView.getResources().getString(R.string.word_separators);
-        input_modes = inputView.getResources().getStringArray(R.array.input_modes);
 
 		Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
 	}

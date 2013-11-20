@@ -5,6 +5,12 @@ repositories {
 }
 
 dependencies {
+    def nativeLibs = new File("$buildDir/native-libs")
+    if (!nativeLibs.exists()) {
+        nativeLibs.mkdirs()
+    }
+    new File("$nativeLibs/native-libs.jar").createNewFile()
+    
     compile files('libs/native-libs.jar')
 }
 
@@ -22,7 +28,7 @@ task copyNative(type: Jar, dependsOn: 'buildNative') {
     from("${project.projectDir}/libs/") {
         include("**/*.so")
     }
-    into("native-libs/")
+    into("lib/")
     destinationDir(new File("${project.projectDir}/libs/"))
     archiveName("native-libs.jar")
 
@@ -31,7 +37,12 @@ task copyNative(type: Jar, dependsOn: 'buildNative') {
 task buildNative(type: Exec) {
     description "Builds NDK with BLAS included"
     workingDir "${project.projectDir}/jni/"
-    executable "ndk-build"
+
+    if (System.env.NDK_ROOT != null) {
+	    def ndkBuild = new File(System.env.NDK_ROOT, 'ndk-build')
+		executable ndkBuild
+		executable "${ndkBuild}.cmd"
+    }
 }
 
 tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNative }

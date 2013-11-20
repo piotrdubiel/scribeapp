@@ -12,6 +12,13 @@ before_install:
   - export ANDROID_HOME=$PWD/android-sdk-linux
   - export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
+  # Install Android NDK
+  - wget http://dl.google.com/android/ndk/android-ndk-r9-linux-x86_64.tar.bz2
+  - tar xf android-sdk_r22.0.1-linux_4travis.tar.bz2
+  - tar xf android-ndk-r9-linux-x86_64.tar.bz2
+  - mv android-ndk-r9 android-ndk
+  - export NDK_ROOT=$PWD/android-ndk
+  
   # Gradle
   - wget http://services.gradle.org/distributions/gradle-1.8-bin.zip
   - unzip gradle-1.8-bin.zip
