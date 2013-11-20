@@ -4,7 +4,7 @@
 #include <deque>
 #include <vector>
 #include <iostream>
-#include "layer.h"
+#include "Layer.h"
 
 using namespace std;
 

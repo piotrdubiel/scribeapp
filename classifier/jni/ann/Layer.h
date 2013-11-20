@@ -3,7 +3,7 @@
 
 #include <deque>
 #include <vector>
-#include "neuron.h"
+#include "Neuron.h"
 
 using namespace std;
 
