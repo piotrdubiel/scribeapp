@@ -1,4 +1,4 @@
-#include "network.h"
+#include "Network.h"
 
 Network::Network(vector<int> arch)
 {
