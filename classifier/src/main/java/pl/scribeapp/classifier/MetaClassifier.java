@@ -2,8 +2,6 @@ package pl.scribeapp.classifier;
 
 import java.io.IOException;
 
-import pl.scribeapp.classifier.R;
-import pl.scribeapp.classifier.Utils;
 import pl.scribeapp.classifier.ann.Network;
 import pl.scribeapp.classifier.ann.NetworkImpl;
 import pl.scribeapp.classifier.ClassificationResult.Label;
@@ -12,20 +10,20 @@ import android.gesture.Gesture;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-public class MetaClassificator implements Classificator {
-	private static final String TAG = "MetaClassificator";
+public class MetaClassifier implements Classifier {
+	private static final String TAG = "MetaClassifier";
 
 	private Network small_net;
 	private Network capital_net;
 	private Network digit_net;
 
-	private GestureLibraryClassificator small_library;
-	private GestureLibraryClassificator capital_library;
-	private GestureLibraryClassificator number_library;
+	private GestureLibraryClassifier small_library;
+	private GestureLibraryClassifier capital_library;
+	private GestureLibraryClassifier number_library;
 	private PCA pca;
 	private Context context;
 
-	public MetaClassificator(Context c) {
+	public MetaClassifier(Context c) {
 		context = c;
 		try {
 			pca = new PCA(c);
@@ -34,21 +32,21 @@ public class MetaClassificator implements Classificator {
 			capital_net = NetworkImpl.createFromInputStream(context.getAssets().open("pl_capital_net"), CAPITAL_ALPHA);
 			digit_net = NetworkImpl.createFromInputStream(context.getAssets().open("digit_net"), DIGIT);
 			
-			small_library = new GestureLibraryClassificator(c, GestureLibraryClassificator.USER_SMALL_FILENAME);
+			small_library = new GestureLibraryClassifier(c, GestureLibraryClassifier.USER_SMALL_FILENAME);
 			if (!small_library.isValid()) {
 				Log.d(TAG, "Default small lib");
-				small_library = new GestureLibraryClassificator(c, R.raw.default_small_lib);
+				small_library = new GestureLibraryClassifier(c, R.raw.default_small_lib);
 			}
 
-			capital_library = new GestureLibraryClassificator(c, GestureLibraryClassificator.USER_CAPITAL_FILENAME);
+			capital_library = new GestureLibraryClassifier(c, GestureLibraryClassifier.USER_CAPITAL_FILENAME);
 			if (!capital_library.isValid()) {
-				capital_library = new GestureLibraryClassificator(c, R.raw.default_capital_lib);
+				capital_library = new GestureLibraryClassifier(c, R.raw.default_capital_lib);
 				Log.d(TAG, "Default capital lib");
 			}
 
-			number_library = new GestureLibraryClassificator(c, GestureLibraryClassificator.USER_DIGIT_FILENAME);
+			number_library = new GestureLibraryClassifier(c, GestureLibraryClassifier.USER_DIGIT_FILENAME);
 			if (!number_library.isValid()) {
-				number_library = new GestureLibraryClassificator(c, R.raw.default_digit_lib);
+				number_library = new GestureLibraryClassifier(c, R.raw.default_digit_lib);
 				Log.d(TAG, "Default number lib");
 			}
 
@@ -57,12 +55,12 @@ public class MetaClassificator implements Classificator {
 			e.printStackTrace();
 		}
 
-		Log.i(TAG, "Classificator loaded");
+		Log.i(TAG, "Classifier loaded");
 	}
 
 	/** (non-Javadoc)
 	 * Zwraca dla gestu o danym typie listę znaków, które ten gest może przedstawiać, zawartą w obiekcie ClassificationResult.
-	 * @see Classificator#classify(android.gesture.Gesture, int)
+	 * @see Classifier#classify(android.gesture.Gesture, int)
 	 */
 	@Override
 	public ClassificationResult classify(Gesture gesture, int type) {
@@ -149,7 +147,7 @@ public class MetaClassificator implements Classificator {
 
 	/**
 	 * Nieużywane, zawsze zwraca null
-	 * @see Classificator#classify(float[])
+	 * @see Classifier#classify(float[])
 	 */
 	@Override
 	public ClassificationResult classify(float[] sample) {
@@ -158,7 +156,7 @@ public class MetaClassificator implements Classificator {
 
 	/**
 	 * Nieużywane, zawsze zwraca null
-	 * @see Classificator#classifyRaw(float[])
+	 * @see Classifier#classifyRaw(float[])
 	 */
 	@Override
 	public float[] classifyRaw(float[] sample) {

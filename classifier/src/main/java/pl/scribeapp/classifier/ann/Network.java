@@ -4,9 +4,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import pl.scribeapp.classifier.Classificator;
+import pl.scribeapp.classifier.Classifier;
 
-public interface Network extends Classificator {
+public interface Network extends Classifier {
 	public List<List<Vector>> train(float[] in,int label) throws Exception;
 	
 	/**

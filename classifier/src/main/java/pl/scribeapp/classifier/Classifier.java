@@ -2,24 +2,12 @@ package pl.scribeapp.classifier;
 
 import android.gesture.Gesture;
 
-public interface Classificator {
-	/**
-	 * Typ klasyfikatora rozpoznający małe litery
-	 */
-	public static final int SMALL_ALPHA			= 1 << 0;
-	/**
-	 * Typ klasyfikatora rozpoznający wielkie litery
-	 */
-	public static final int CAPITAL_ALPHA		= 1 << 1;
-	/**
-	 * Typ klasyfikatora rozpoznający cyfry
-	 */
-	public static final int DIGIT				= 1 << 2;
-	/**
-	 * Klasyfikator grupowy. Nieużywany
-	 */
-	public static final int GROUP				= 1 << 3;
-	
+public interface Classifier {
+    public static final int SMALL_ALPHA = 1;
+    public static final int CAPITAL_ALPHA = 2;
+    public static final int DIGIT = 3;
+    public static final int GROUP = 4;
+
 	/**
 	 * Klasyfikacja gestu o danym typie i
 	 * opakowanie wyniku w obiekt ClassificationResult

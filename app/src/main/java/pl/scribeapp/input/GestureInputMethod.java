@@ -2,8 +2,8 @@ package pl.scribeapp.input;
 
 import pl.scribeapp.R;
 import pl.scribeapp.classifier.ClassificationResult;
-import pl.scribeapp.classifier.Classificator;
-import pl.scribeapp.classifier.MetaClassificator;
+import pl.scribeapp.classifier.Classifier;
+import pl.scribeapp.classifier.MetaClassifier;
 import pl.scribeapp.settings.SettingsActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -43,12 +43,12 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 	String word_separators;
 	String[] input_modes;
 
-	private MetaClassificator classHandler;
+	private MetaClassifier classHandler;
 
 	int current_mode;
 
-	private int[] modes = { Classificator.CAPITAL_ALPHA, Classificator.SMALL_ALPHA,
-			Classificator.DIGIT };
+	private int[] modes = { Classifier.CAPITAL_ALPHA, Classifier.SMALL_ALPHA,
+			Classifier.DIGIT };
 
 	int gestureInterval;
 	boolean capsLock = false;
@@ -98,7 +98,7 @@ public class GestureInputMethod extends InputMethodController implements OnClick
         word_separators = inputView.getResources().getString(R.string.word_separators);
         input_modes = inputView.getResources().getStringArray(R.array.input_modes);
 
-		// currentType = Classificator.ALPHA;
+		// currentType = Classifier.ALPHA;
 		current_mode = 0;
 		typeSwitch.setText(input_modes[0]);
 

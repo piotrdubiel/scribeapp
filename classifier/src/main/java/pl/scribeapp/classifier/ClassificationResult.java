@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import pl.scribeapp.classifier.Utils;
 import android.util.Log;
 
 public class ClassificationResult {
@@ -22,7 +21,7 @@ public class ClassificationResult {
 	
 	/**
 	 * Typ klasyfikatora, który utworzył ten rezultat.
-	 * @see Classificator
+	 * @see Classifier
 	 */
 	int type;
 

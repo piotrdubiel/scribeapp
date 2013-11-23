@@ -43,7 +43,7 @@ public class TrainingService extends IntentService {
 //				}
 //
 //				try {
-//					network.train(sample, Utils.code(label, Classificator.ALPHA_AND_NUMBER));
+//					network.train(sample, Utils.code(label, Classifier.ALPHA_AND_NUMBER));
 //				}
 //				catch (Exception e) {
 //					// TODO Auto-generated catch block
@@ -57,7 +57,7 @@ public class TrainingService extends IntentService {
 //			protected void onPostExecute(final Void x) {
 //				super.onPostExecute(x);
 //
-//				final Pair<Character, Float> result = Utils.getBest(network.answer(sample), 1, Classificator.ALPHA_AND_NUMBER).get(0);
+//				final Pair<Character, Float> result = Utils.getBest(network.answer(sample), 1, Classifier.ALPHA_AND_NUMBER).get(0);
 //				Toast.makeText(TrainingService.this, "After training: "
 //						+ result.first + " " + result.second, Toast.LENGTH_LONG).show();
 //			}

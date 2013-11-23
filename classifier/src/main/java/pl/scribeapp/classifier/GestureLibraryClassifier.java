@@ -15,26 +15,26 @@ import android.gesture.Prediction;
  * a nie obiektu ArrayList<Prediction>, jak robi to GestureLibrary.
  * @see android.gesture.GestureLibrary
  */
-public class GestureLibraryClassificator implements Classificator {
+public class GestureLibraryClassifier implements Classifier {
 	public static final String USER_SMALL_FILENAME = "user_small_lib";
 	public static final String USER_CAPITAL_FILENAME = "user_capital_lib";
 	public static final String USER_DIGIT_FILENAME = "user_digit_lib";
 
 	private GestureLibrary library;
 
-	public GestureLibraryClassificator(Context context, String filename) {
+	public GestureLibraryClassifier(Context context, String filename) {
 		library = GestureLibraries.fromPrivateFile(context, filename);
 		library.load();
 	}
 
-	public GestureLibraryClassificator(Context context, int resid) {
+	public GestureLibraryClassifier(Context context, int resid) {
 		library = GestureLibraries.fromRawResource(context, resid);
 		library.load();
 	}
 
 	/**
 	 * Zwraca wynik klasyfikacji gestu w bibliotece GestureLibrary opakowany w obiekt ClassificationResult. Normalizuje wynik.
-	 * @see Classificator#classify(android.gesture.Gesture, int)
+	 * @see Classifier#classify(android.gesture.Gesture, int)
 	 */
 	@Override
 	public ClassificationResult classify(Gesture gesture, int type) {
@@ -52,7 +52,7 @@ public class GestureLibraryClassificator implements Classificator {
 
 	/**
 	 * Nieużywane, zawsze zwraca null
-	 * @see Classificator#classify(float[])
+	 * @see Classifier#classify(float[])
 	 */
 	@Override
 	public ClassificationResult classify(float[] sample) {
@@ -74,7 +74,7 @@ public class GestureLibraryClassificator implements Classificator {
 
 	/**
 	 * Nieużywane, zawsze zwraca null
-	 * @see Classificator#classifyRaw(float[])
+	 * @see Classifier#classifyRaw(float[])
 	 */
 	@Override
 	public float[] classifyRaw(float[] sample) {

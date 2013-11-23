@@ -8,10 +8,10 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.Utils;
 import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.ClassificationResult.Label;
-import pl.scribeapp.classifier.Classificator;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -48,14 +48,14 @@ public class NetworkImpl implements Network {
 	@Override
 	public ClassificationResult classify(float[] sample) {
 		float[] y = classifyRaw(sample);
-		if ((type & Classificator.GROUP) == 0) {
+		if ((type & Classifier.GROUP) == 0) {
 			return new ClassificationResult(y, type);
 		}
 		else {
 			ArrayList<Label> result = new ArrayList<Label>();
-			if ((type & Classificator.DIGIT) == 0 
-					&& (type & Classificator.SMALL_ALPHA) > 0
-					&& (type & Classificator.CAPITAL_ALPHA) > 0) {
+			if ((type & Classifier.DIGIT) == 0
+					&& (type & Classifier.SMALL_ALPHA) > 0
+					&& (type & Classifier.CAPITAL_ALPHA) > 0) {
 				// COS net
 				for (char c : Utils.LETTERS)
 					result.add(new Label(c, y[1]));
@@ -63,9 +63,9 @@ public class NetworkImpl implements Network {
 					result.add(new Label(Character.toUpperCase(c), y[0]));
 
 			}
-			if ((type & Classificator.DIGIT) > 0 
-					&& (type & Classificator.SMALL_ALPHA) > 0
-					&& (type & Classificator.CAPITAL_ALPHA) > 0) {
+			if ((type & Classifier.DIGIT) > 0
+					&& (type & Classifier.SMALL_ALPHA) > 0
+					&& (type & Classifier.CAPITAL_ALPHA) > 0) {
 				// LOD net
 				for (char c : Utils.LETTERS)
 					result.add(new Label(c, y[1]));

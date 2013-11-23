@@ -3,7 +3,7 @@ package pl.scribeapp.settings;
 import java.util.ArrayList;
 import pl.scribeapp.R;
 import pl.scribeapp.input.Utils;
-import pl.scribeapp.classifier.GestureLibraryClassificator;
+import pl.scribeapp.classifier.GestureLibraryClassifier;
 import android.app.Activity;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;
@@ -64,13 +64,13 @@ public class TrainGesturesActivity extends Activity implements OnClickListener {
 		// getFileStreamPath(ALPHA_FILENAME).delete();
 		// getFileStreamPath(NUMBER_FILENAME).delete();
 
-		small_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassificator.USER_SMALL_FILENAME));
+		small_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassifier.USER_SMALL_FILENAME));
 		small_library.load();
 
-		capital_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassificator.USER_CAPITAL_FILENAME));
+		capital_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassifier.USER_CAPITAL_FILENAME));
 		capital_library.load();
 
-		digit_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassificator.USER_DIGIT_FILENAME));
+		digit_library = GestureLibraries.fromFile(getFileStreamPath(GestureLibraryClassifier.USER_DIGIT_FILENAME));
 		digit_library.load();
 
 		currentGesture = loadGesture(characters.charAt(currentChar));

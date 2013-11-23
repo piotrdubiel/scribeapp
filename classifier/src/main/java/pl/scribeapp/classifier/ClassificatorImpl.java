@@ -23,7 +23,7 @@
 //
 //import com.google.inject.Inject;
 //
-//public class ClassificatorImpl implements Classificator {
+//public class ClassificatorImpl implements Classifier {
 //	private static final boolean DEBUG = true;
 //
 //	private Network pl_small_net;
@@ -36,7 +36,7 @@
 //
 //	private Context context;
 //
-//	private static final String TAG = "Classificator";
+//	private static final String TAG = "Classifier";
 //
 //	@Inject
 //	public ClassificatorImpl(Context c) {
@@ -61,7 +61,7 @@
 //			Log.d(TAG, String.valueOf(numberLibrary.getGestureEntries().size())
 //					+ " gestures in number library");
 //		}
-//		Log.i(TAG, "Classificator loaded");
+//		Log.i(TAG, "Classifier loaded");
 //	}
 //
 //	@Override
@@ -92,9 +92,9 @@
 //		// PCA
 //		sample = Utils.applyPCA(sample, mu, trmx);
 //
-//		// if (type == Classificator.ALPHA_AND_NUMBER) {
-//		// if (lonY[0] > lonY[1]) type = Classificator.ALPHA;
-//		// else type = Classificator.NUMBER;
+//		// if (type == Classifier.ALPHA_AND_NUMBER) {
+//		// if (lonY[0] > lonY[1]) type = Classifier.ALPHA;
+//		// else type = Classifier.NUMBER;
 //		// }
 //
 //		switch (type) {

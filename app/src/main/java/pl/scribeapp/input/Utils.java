@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.scribeapp.classifier.Classificator;
+import pl.scribeapp.classifier.Classifier;
+
 import android.gesture.Gesture;
 import android.gesture.GestureStroke;
 import android.graphics.Bitmap;
@@ -116,7 +117,7 @@ public class Utils {
 	}
 
 	public static int code(Character i, int type) {
-		// if (type == Classificator.ALPHA_AND_NUMBER) {
+		// if (type == Classifier.ALPHA_AND_NUMBER) {
 		// switch (i) {
 		// case '0':
 		// return 0;
@@ -214,7 +215,7 @@ public class Utils {
 	}
 
 	public static Character decode(int i, int type) {
-		if (type == Classificator.DIGIT) {
+		if (type == Classifier.DIGIT) {
 			switch (i) {
 			case 0:
 				return '0';
@@ -238,7 +239,7 @@ public class Utils {
 				return '9';
 			}
 		}
-		else if (type == Classificator.SMALL_ALPHA) {
+		else if (type == Classifier.SMALL_ALPHA) {
 			switch (i) {
 			case 0:
 				return 'a';
@@ -312,17 +313,17 @@ public class Utils {
 				return 'ż';
 			}
 		}
-		else if (type == Classificator.CAPITAL_ALPHA) {
-			return Character.toUpperCase(decode(i, Classificator.SMALL_ALPHA));
+		else if (type == Classifier.CAPITAL_ALPHA) {
+			return Character.toUpperCase(decode(i, Classifier.SMALL_ALPHA));
 		}
-		else if (type == (Classificator.CAPITAL_ALPHA | Classificator.SMALL_ALPHA)) {
-			if (i < 35) return decode(i, Classificator.CAPITAL_ALPHA);
-			else return decode(i - 35, Classificator.SMALL_ALPHA);
+		else if (type == (Classifier.CAPITAL_ALPHA | Classifier.SMALL_ALPHA)) {
+			if (i < 35) return decode(i, Classifier.CAPITAL_ALPHA);
+			else return decode(i - 35, Classifier.SMALL_ALPHA);
 		}
-		else if (type == (Classificator.CAPITAL_ALPHA | Classificator.SMALL_ALPHA | Classificator.DIGIT)) {
-			if (i < 10) return decode(i, Classificator.DIGIT);
-			if (i >= 10 && i < 45) return decode(i - 10, Classificator.CAPITAL_ALPHA);
-			else return decode(i - 45, Classificator.SMALL_ALPHA);
+		else if (type == (Classifier.CAPITAL_ALPHA | Classifier.SMALL_ALPHA | Classifier.DIGIT)) {
+			if (i < 10) return decode(i, Classifier.DIGIT);
+			if (i >= 10 && i < 45) return decode(i - 10, Classifier.CAPITAL_ALPHA);
+			else return decode(i - 45, Classifier.SMALL_ALPHA);
 		}
 		return null;
 	}
