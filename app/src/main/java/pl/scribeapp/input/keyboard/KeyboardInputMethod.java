@@ -1,9 +1,11 @@
-package pl.scribeapp.input;
+package pl.scribeapp.input.keyboard;
 
 import java.util.Arrays;
 import java.util.List;
 
 import pl.scribeapp.R;
+import pl.scribeapp.input.InputMethodController;
+import pl.scribeapp.input.ScribeInputService;
 import pl.scribeapp.input.keyboard.StandardKeyboard;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.Keyboard.Key;

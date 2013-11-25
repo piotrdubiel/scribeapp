@@ -1,9 +1,11 @@
-package pl.scribeapp.input;
+package pl.scribeapp.input.handwriting;
 
 import pl.scribeapp.R;
 import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.MetaClassifier;
+import pl.scribeapp.input.InputMethodController;
+import pl.scribeapp.input.ScribeInputService;
 import pl.scribeapp.settings.SettingsActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;

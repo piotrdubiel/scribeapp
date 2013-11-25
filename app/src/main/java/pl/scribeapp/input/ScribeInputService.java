@@ -8,6 +8,9 @@ import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.ClassificationResult.Label;
 import pl.scribeapp.input.dictionary.SuggestionManager;
 import pl.scribeapp.input.dictionary.TrigramDatabase;
+import pl.scribeapp.input.handwriting.GestureInputMethod;
+import pl.scribeapp.input.keyboard.KeyboardInputMethod;
+
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.inputmethodservice.InputMethodService;
@@ -143,7 +146,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	/**
 	 * Wprowadza aktualnie komponowany tekst do pola i odświeża listę sugestii.
 	 */
-	void commitText() {
+	public void commitText() {
 		InputConnection ic = getCurrentInputConnection();
 		if (composing_text.length() > 0) {
 			ic.commitText(composing_text, composing_text.length());
@@ -162,7 +165,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	 * Jeśli znak jest separatorem słowa, to wywołuje metodę commitText.
 	 * @param c znak, który ma zostać wpisany
 	 */
-	void enterCharacter(Character c) {
+	public void enterCharacter(Character c) {
 		if (c == null) return;
 
 		InputConnection ic = getCurrentInputConnection();
@@ -189,7 +192,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	 * Aktualizuje w obu przypadkach listę sugestii.
 	 * @param result wynik rozpoznawania
 	 */
-	void enterCharacters(ClassificationResult result) {
+	public void enterCharacters(ClassificationResult result) {
 		if (result == null) return;
 
 		InputConnection ic = getCurrentInputConnection();
@@ -222,7 +225,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	/**
 	 * Usuwa ostatni znak i odświeża listę sugestii.
 	 */
-	void delete() {
+	public void delete() {
 		Log.d(TAG, "delete");
 		InputConnection ic = getCurrentInputConnection();
 		if (composing_text.length() > 0) {
@@ -238,7 +241,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	/**
 	 * Usuwa ostatni wyraz za kursorem. Odświeża listę sugestii.
 	 */
-	void deleteAfterLongClick() {
+	public void deleteAfterLongClick() {
 		InputConnection ic = getCurrentInputConnection();
 		if (composing_text.length() > 0) {
 			composing_text.setLength(0);
@@ -263,7 +266,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		refreshSuggestions();
 	}
 
-	void pickSuggestion(String word) {
+	public void pickSuggestion(String word) {
 		if (completion_settings && completion_on) {
 			getCurrentInputConnection().commitText(word, word.length());
 			if (!suggest.isValid(word)) {
@@ -279,7 +282,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	 * Powoduje pobranie listy sugestii dla aktualnie wpisanego prefiksu 
 	 * i wyświetlenie ich w widoku SuggestionView.
 	 */
-	void refreshSuggestions() {
+	public void refreshSuggestions() {
 		Log.i(TAG, "REFRESH Suggestions " + String.valueOf(suggest != null ? suggest.isReady() : false));
 		if (completion_settings && completion_on && suggest != null && suggest.isReady()) {
 			// if (getCurrentInputConnection().getExtractedText(
@@ -351,7 +354,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		Log.d(TAG, "Trigrams: " + String.valueOf(trigramsOn));
 	}
 
-	void vibrate() {
+	public void vibrate() {
 		if (vibrateOn) {
 			currentInputMethod.inputView.performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING);
 		}

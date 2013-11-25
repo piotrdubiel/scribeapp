@@ -24,8 +24,8 @@ public class SuggestionManager {
 		new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... params) {
-				native_dictionary = new NativeDictionary(context, maxSuggestions);
 				user_dictionary = new UserDictionary(context);
+                native_dictionary = new UserDictionary(context);
 				return null;
 			}
 
