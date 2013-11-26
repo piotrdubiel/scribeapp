@@ -192,21 +192,23 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	 * Aktualizuje w obu przypadkach listę sugestii.
 	 * @param result wynik rozpoznawania
 	 */
-	public void enterCharacters(ClassificationResult result) {
+	public void enterCharacters(String result) {
 		if (result == null) return;
 
 		InputConnection ic = getCurrentInputConnection();
 
 		String prefix = ic.getTextBeforeCursor(2, 0).toString();
-		if (prefix.length() < 2 || trigramsOn == false) enterCharacter(result.getLabels()[0]);
-		else {
-			ArrayList<Label> trigrams = trigram_database.getSuggestions(prefix);
-			Character c = result.combine(new ClassificationResult(trigrams, 0)).getLabels(1)[0];
-			for (Label l : trigrams)
-				Log.d(TAG, "Got trigram " + prefix+l.label+" "+l.belief);
-			Log.d(TAG, "Got trigram " + c);
-			enterCharacter(c);
-		}
+        enterCharacters(result);
+
+//		if (prefix.length() < 2 || trigramsOn == false) enterCharacter(result.getLabels()[0]);
+//		else {
+//			ArrayList<Label> trigrams = trigram_database.getSuggestions(prefix);
+//			Character c = result.combine(new ClassificationResult(trigrams, 0)).getLabels(1)[0];
+//			for (Label l : trigrams)
+//				Log.d(TAG, "Got trigram " + prefix+l.label+" "+l.belief);
+//			Log.d(TAG, "Got trigram " + c);
+//			enterCharacter(c);
+//		}
 	}
 
 	/**

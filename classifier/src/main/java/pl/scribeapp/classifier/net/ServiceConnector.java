@@ -1,4 +1,4 @@
-package pl.scribeapp.classifier.utils;
+package pl.scribeapp.classifier.net;
 
 /**
  * Created by piotrekd on 11/23/13.

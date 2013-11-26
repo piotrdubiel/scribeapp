@@ -44,7 +44,12 @@ public class NativeNetwork implements Network {
 		return null;
 	}
 
-	@Override
+    @Override
+    public String classify(Gesture gesture) {
+        return null;
+    }
+
+    @Override
 	public ClassificationResult classify(float[] sample) {
 		// TODO Auto-generated method stub
 		return null;

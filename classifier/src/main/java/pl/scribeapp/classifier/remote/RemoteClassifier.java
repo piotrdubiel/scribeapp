@@ -6,21 +6,27 @@ import javax.inject.Inject;
 
 import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
-import pl.scribeapp.classifier.utils.ServiceConnector;
+import pl.scribeapp.classifier.net.HerokuConnector;
+import pl.scribeapp.classifier.net.ServiceConnector;
 
 /**
  * Created by piotrekd on 11/22/13.
  */
 public class RemoteClassifier implements Classifier {
-    private static final String URI = "http://scribeserver.herokuapp.com";
-
-    @Inject
     ServiceConnector serviceConnector;
+
+    public RemoteClassifier() {
+        serviceConnector = new HerokuConnector();
+    }
 
     @Override
     public ClassificationResult classify(Gesture gesture, int type) {
-        serviceConnector.request("recognize", gesture.toString());
         return null;
+    }
+
+    @Override
+    public String classify(Gesture gesture) {
+        return serviceConnector.request("recognize", gesture.toString());
     }
 
     @Override

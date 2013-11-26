@@ -50,7 +50,12 @@ public class GestureLibraryClassifier implements Classifier {
 		return new ClassificationResult(labels,type);
 	}
 
-	/**
+    @Override
+    public String classify(Gesture gesture) {
+        return null;
+    }
+
+    /**
 	 * Nieużywane, zawsze zwraca null
 	 * @see Classifier#classify(float[])
 	 */

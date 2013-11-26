@@ -4,6 +4,7 @@ import pl.scribeapp.R;
 import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.MetaClassifier;
+import pl.scribeapp.classifier.remote.RemoteClassifier;
 import pl.scribeapp.input.InputMethodController;
 import pl.scribeapp.input.ScribeInputService;
 import pl.scribeapp.settings.SettingsActivity;
@@ -57,7 +58,7 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 
 	private Object recognition_lock = new Object();
 
-	private ClassificationResult current_result;
+	private String current_result;
 
 	/**
 	 * Konstruktor inicjuje elementy widoku i ładuje klasyfikatory. Wymaga
@@ -229,15 +230,16 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 
 		public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event) {}
 
-		private class RecognitionTask extends AsyncTask<Gesture, Void, ClassificationResult> {
+		private class RecognitionTask extends AsyncTask<Gesture, Void, String> {
 
 			@Override
-			protected ClassificationResult doInBackground(Gesture... gestures) {
-				return classHandler.classify(gestures[0], modes[current_mode]);
+			protected String doInBackground(Gesture... gestures) {
+                //classHandler.classify(gestures[0], modes[current_mode]).best().label.toString();
+                return new RemoteClassifier().classify(gestures[0]);
 			}
 
 			@Override
-			protected void onPostExecute(ClassificationResult result) {
+			protected void onPostExecute(String result) {
 				super.onPostExecute(result);
 				synchronized (recognition_lock) {
 					current_result = result;

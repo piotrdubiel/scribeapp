@@ -124,7 +124,12 @@ public class MetaClassifier implements Classifier {
 		return result;
 	}
 
-	/**
+    @Override
+    public String classify(Gesture gesture) {
+        return null;
+    }
+
+    /**
 	 * Konwertuje podany gest na wektor zapisany w tablicy wartości float.
 	 * Wektor ten jest tworzony zgodnie z formatem MNIST, a podlega analizie głównych składowych (PCA).
 	 * @param gesture

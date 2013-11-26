@@ -45,7 +45,12 @@ public class NetworkImpl implements Network {
 		return null;
 	}
 
-	@Override
+    @Override
+    public String classify(Gesture gesture) {
+        return null;
+    }
+
+    @Override
 	public ClassificationResult classify(float[] sample) {
 		float[] y = classifyRaw(sample);
 		if ((type & Classifier.GROUP) == 0) {

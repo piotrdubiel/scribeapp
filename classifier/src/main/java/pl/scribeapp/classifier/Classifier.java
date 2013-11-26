@@ -16,6 +16,9 @@ public interface Classifier {
 	 * @return rezultat klasyfikacji w obiekcie ClassificationResult
 	 */
 	public ClassificationResult classify(Gesture gesture, int type);
+
+    public String classify(Gesture gesture);
+
 	/**
 	 * Klasyfikacja wektora cech zapisanego jako tablica wartości float 
 	 * i opakowanie wyniku w obiekt ClassificationResult
