@@ -1,4 +1,4 @@
-package pl.scribeapp.input;
+package pl.scribeapp.input.suggestions;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.scribeapp.R;
+import pl.scribeapp.input.ScribeInputService;
 
 public class CandidateView extends View {
 

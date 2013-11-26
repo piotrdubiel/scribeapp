@@ -33,14 +33,13 @@ import android.widget.ToggleButton;
 public class GestureInputMethod extends InputMethodController implements OnClickListener,
 		OnLongClickListener {
 	private static final String TAG = "GestureInput";
-	Button typeSwitch;
+
 	ImageButton deleteKey;
 	ImageButton enterKey;
 	ImageButton spaceKey;
 	ToggleButton symbolSwitch;
 	KeyboardView supportSymbolKeyboardView;
 	GestureOverlayView gestureView;
-	TextView recentLabel;
 	ImageButton keyboardSwitch;
 
 	String word_separators;
@@ -56,10 +55,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 	int gestureInterval;
 	boolean capsLock = false;
 
-	private Object recognition_lock = new Object();
-
-	private String current_result;
-
 	/**
 	 * Konstruktor inicjuje elementy widoku i ładuje klasyfikatory. Wymaga
 	 * podania klasy ScribeInputService, z którą będzie powiązany.
@@ -67,22 +62,14 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 	public GestureInputMethod(ScribeInputService s) {
 		super(s, R.layout.gesture_input_view);
 
-		// altKey = (ToggleButton) inputView.findViewById(R.id.altKey);
-		// shiftKey = (ToggleButton) inputView.findViewById(R.id.shiftKey);
-		typeSwitch = (Button) inputView.findViewById(R.id.typeSwitch);
 		deleteKey = (ImageButton) inputView.findViewById(R.id.deleteKey);
 		enterKey = (ImageButton) inputView.findViewById(R.id.enterKey);
 		spaceKey = (ImageButton) inputView.findViewById(R.id.spaceKey);
 		symbolSwitch = (ToggleButton) inputView.findViewById(R.id.symbolSwitch);
 		supportSymbolKeyboardView = (KeyboardView) inputView.findViewById(R.id.support_keyboard);
 		gestureView = (GestureOverlayView) inputView.findViewById(R.id.gesture_overlay);
-		recentLabel = (TextView) inputView.findViewById(R.id.recentLabel);
 		keyboardSwitch = (ImageButton) inputView.findViewById(R.id.keyboardToggle);
 
-		// altKey.setOnClickListener(this);
-		// shiftKey.setOnClickListener(this);
-		// shiftKey.setOnLongClickListener(this);
-		typeSwitch.setOnClickListener(this);
 		deleteKey.setOnClickListener(this);
 		deleteKey.setOnLongClickListener(this);
 		enterKey.setOnClickListener(this);
@@ -91,7 +78,7 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		symbolSwitch.setOnClickListener(this);
 		keyboardSwitch.setOnClickListener(this);
 
-		gestureView.addOnGestureListener(new GestureProcessor());
+		gestureView.addOnGestureListener(new WordRecognizer(this));
 		gestureView.setGestureStrokeLengthThreshold(0.0f);
 		gestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
 
@@ -103,7 +90,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 
 		// currentType = Classifier.ALPHA;
 		current_mode = 0;
-		typeSwitch.setText(input_modes[0]);
 
 		SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(service);
 
@@ -145,8 +131,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		if (v.getId() == R.id.typeSwitch) {
 			current_mode++;
 			if (current_mode >= modes.length) current_mode = 0;
-
-			typeSwitch.setText(input_modes[current_mode]);
 		}
 		if (v.getId() == R.id.deleteKey) {
 			Log.d(TAG, "delete key");
@@ -189,77 +173,13 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		symbolSwitch.setChecked(visible);
 	}
 
-	private class GestureProcessor implements OnGestureListener {
-		private CommitTextTask current_task;
-
-		public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
-			Log.d(TAG, "GESTURE STARTED " + System.currentTimeMillis());
-
-			keyboardSwitch.setEnabled(false);
-			typeSwitch.setEnabled(false);
-			symbolSwitch.setEnabled(false);
-			deleteKey.setEnabled(false);
-			spaceKey.setEnabled(false);
-			enterKey.setEnabled(false);
-
-			synchronized (recognition_lock) {
-				if (current_task != null) overlay.removeCallbacks(current_task);
-			}
-		}
-
-		public void onGestureEnded(GestureOverlayView overlay, MotionEvent event) {
-			Log.d(TAG, "GESTURE ENDED " + System.currentTimeMillis());
-
-			keyboardSwitch.setEnabled(true);
-			typeSwitch.setEnabled(true);
-			symbolSwitch.setEnabled(true);
-			deleteKey.setEnabled(true);
-			spaceKey.setEnabled(true);
-			enterKey.setEnabled(true);
-
-			new RecognitionTask().execute(overlay.getGesture());
-
-			synchronized (recognition_lock) {
-				overlay.removeCallbacks(current_task);
-				current_task = new CommitTextTask();
-				overlay.postDelayed(current_task, gestureInterval);
-			}
-		}
-
-		public void onGesture(GestureOverlayView overlay, MotionEvent event) {}
-
-		public void onGestureCancelled(GestureOverlayView overlay, MotionEvent event) {}
-
-		private class RecognitionTask extends AsyncTask<Gesture, Void, String> {
-
-			@Override
-			protected String doInBackground(Gesture... gestures) {
-                //classHandler.classify(gestures[0], modes[current_mode]).best().label.toString();
-                return new RemoteClassifier().classify(gestures[0]);
-			}
-
-			@Override
-			protected void onPostExecute(String result) {
-				super.onPostExecute(result);
-				synchronized (recognition_lock) {
-					current_result = result;
-				}
-			}
-		}
-
-		private class CommitTextTask implements Runnable {
-			@Override
-			public void run() {
-				Log.d(TAG, "Commit text");
-				synchronized (recognition_lock) {
-					service.enterCharacters(current_result);
-					current_result = null;
-					current_task = null;
-					gestureView.clear(false);
-				}
-			}
-		}
-	}
+    void setButtonsState(boolean state) {
+        keyboardSwitch.setEnabled(state);
+        symbolSwitch.setEnabled(state);
+        deleteKey.setEnabled(state);
+        spaceKey.setEnabled(state);
+        enterKey.setEnabled(state);
+    }
 
 	private class SymbolProcessor implements OnKeyboardActionListener {
 		public void onKey(int primaryCode, int[] keyCodes) {

@@ -1,15 +1,13 @@
 package pl.scribeapp.input;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pl.scribeapp.R;
-import pl.scribeapp.classifier.ClassificationResult;
-import pl.scribeapp.classifier.ClassificationResult.Label;
 import pl.scribeapp.input.dictionary.SuggestionManager;
 import pl.scribeapp.input.dictionary.TrigramDatabase;
 import pl.scribeapp.input.handwriting.GestureInputMethod;
 import pl.scribeapp.input.keyboard.KeyboardInputMethod;
+import pl.scribeapp.input.suggestions.SuggestionView;
 
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -159,6 +157,13 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		}
 	}
 
+    public void enterWord(CharSequence word) {
+        if (word == null) return;
+        InputConnection ic = getCurrentInputConnection();
+        ic.commitText(word, word.length());
+        composing_text.setLength(0);
+        refreshSuggestions();
+    }
 	
 	/**
 	 * Wprowadza podaną literę do aktualnie komponowanego tekstu.
@@ -183,39 +188,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		vibrate();
 		refreshSuggestions();
 	}
-	
-	
-	/**
-	 * Przy włączonej analizie trigramów porównuje podany w argumencie rezultat (listę znaków zawartą w obiekcie ClassificationResult) z bazą trigramów 
-	 * i wybiera najbardziej prawdopodobny wariant. 
-	 * Jeśli ta opcja jest wyłączona, to wybiera najlepszy w klasyfikatora znak i wprowadza go do aktualnie komponowanego tekstu.
-	 * Aktualizuje w obu przypadkach listę sugestii.
-	 * @param result wynik rozpoznawania
-	 */
-	public void enterCharacters(String result) {
-		if (result == null) return;
 
-		InputConnection ic = getCurrentInputConnection();
-
-		String prefix = ic.getTextBeforeCursor(2, 0).toString();
-        enterCharacters(result);
-
-//		if (prefix.length() < 2 || trigramsOn == false) enterCharacter(result.getLabels()[0]);
-//		else {
-//			ArrayList<Label> trigrams = trigram_database.getSuggestions(prefix);
-//			Character c = result.combine(new ClassificationResult(trigrams, 0)).getLabels(1)[0];
-//			for (Label l : trigrams)
-//				Log.d(TAG, "Got trigram " + prefix+l.label+" "+l.belief);
-//			Log.d(TAG, "Got trigram " + c);
-//			enterCharacter(c);
-//		}
-	}
-
-	/**
-	 * Zakończenie działania aplikacji skutkuje wywołaniem tej metody.
-	 * Zamyka ona bazę danych trigramów oraz słownik.
-	 * @see android.inputmethodservice.InputMethodService#onDestroy()
-	 */
 	@Override
 	public void onDestroy() {
 		Log.i(TAG, "Destroy called - closing databases");
@@ -224,9 +197,6 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		super.onDestroy();
 	}
 
-	/**
-	 * Usuwa ostatni znak i odświeża listę sugestii.
-	 */
 	public void delete() {
 		Log.d(TAG, "delete");
 		InputConnection ic = getCurrentInputConnection();
@@ -240,9 +210,6 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		refreshSuggestions();
 	}
 
-	/**
-	 * Usuwa ostatni wyraz za kursorem. Odświeża listę sugestii.
-	 */
 	public void deleteAfterLongClick() {
 		InputConnection ic = getCurrentInputConnection();
 		if (composing_text.length() > 0) {
@@ -279,11 +246,6 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		}
 	}
 
-	
-	/**
-	 * Powoduje pobranie listy sugestii dla aktualnie wpisanego prefiksu 
-	 * i wyświetlenie ich w widoku SuggestionView.
-	 */
 	public void refreshSuggestions() {
 		Log.i(TAG, "REFRESH Suggestions " + String.valueOf(suggest != null ? suggest.isReady() : false));
 		if (completion_settings && completion_on && suggest != null && suggest.isReady()) {
@@ -326,10 +288,6 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		else setCandidatesViewShown(false);
 	}
 
-	/**
-	 * Powoduje przełączenie trybu wpisywania tekstu na następny.
-	 * Jest wywoływany przez podklasy InputMethodController do zasygnalizowania zmiany trybu.
-	 */
 	public void switchInputMethod() {
 		if (currentInputMethod == gestureInputMethod) currentInputMethod = keyboardInputMethod;
 		else if (currentInputMethod == keyboardInputMethod) currentInputMethod = gestureInputMethod;
@@ -362,12 +320,6 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 		}
 	}
 
-	
-	/**
-	 * Jeśli nastąpi zmiana w ustawieniach aplikacji, metoda ta zostanie wywołana, aby zasygnalizować potrzebę uaktualnienia. 
-	 * Wszystkie ustawienia zostaną jeszcze raz załadowane.
-	 * @see android.content.SharedPreferences.OnSharedPreferenceChangeListener#onSharedPreferenceChanged(android.content.SharedPreferences, java.lang.String)
-	 */
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 		loadPreferences();
 	}

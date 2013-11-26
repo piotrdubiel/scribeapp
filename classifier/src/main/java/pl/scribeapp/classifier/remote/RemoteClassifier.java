@@ -1,6 +1,9 @@
 package pl.scribeapp.classifier.remote;
 
 import android.gesture.Gesture;
+import android.util.Log;
+
+import java.io.IOException;
 
 import javax.inject.Inject;
 
@@ -26,7 +29,12 @@ public class RemoteClassifier implements Classifier {
 
     @Override
     public String classify(Gesture gesture) {
-        return serviceConnector.request("recognize", gesture.toString());
+        try {
+            return serviceConnector.request("recognize", gesture.toString());
+        } catch (IOException e) {
+            Log.e("REMOTE_CONNECTOR", e.getMessage());
+            return "asfasf";
+        }
     }
 
     @Override

@@ -1,7 +1,7 @@
 <resources>
-    <color name="background">#000000</color>
+    <color name="background">#E5E5E5</color>
     <color name="red">#FF0000</color>
-    <color name="gesture">#FFFFFF</color>
+    <color name="gesture">#555</color>
     
     <color name="candidate_normal">#FF000000</color>
     <color name="candidate_recommended">#FFFF0000</color>

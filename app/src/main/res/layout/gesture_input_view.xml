@@ -4,36 +4,11 @@
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:background="@color/background"
-    android:orientation="horizontal" >
-
-    <LinearLayout
-        android:id="@+id/left_tile"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:orientation="vertical" >
-
-        <ImageButton
-            android:id="@+id/keyboardToggle"
-            style="@style/default_button"
-            android:layout_marginTop="5dip"
-            android:src="@drawable/switch_selector" />
-        
-        <ImageButton
-            android:id="@+id/deleteKey"
-            style="@style/default_button"
-            android:layout_weight="0.8"
-            android:src="@drawable/delete_selector" />
-
-        <Button
-            android:id="@+id/typeSwitch"
-            style="@style/default_button"
-            android:layout_marginTop="5dip"
-            android:textColor="@color/text_selector" />
-    </LinearLayout>
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/center_tile"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1.0"
         android:orientation="vertical" >
@@ -41,7 +16,7 @@
         <android.gesture.GestureOverlayView
             android:id="@+id/gesture_overlay"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dip"
             android:layout_weight="1.0"
             android:gestureStrokeType="multiple" >
 
@@ -63,10 +38,22 @@
 
     <LinearLayout
         android:id="@+id/right_tile"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:orientation="vertical" >
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/keyboardToggle"
+            style="@style/default_button"
+            android:src="@drawable/switch_selector" />
+
+        <ImageButton
+            android:id="@+id/deleteKey"
+            style="@style/default_button"
+            android:layout_weight="0.8"
+            android:src="@drawable/delete_selector" />
+
 
         <ToggleButton
             android:id="@+id/symbolSwitch"
