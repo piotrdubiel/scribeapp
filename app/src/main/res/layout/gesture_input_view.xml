@@ -19,13 +19,6 @@
             android:layout_height="200dip"
             android:layout_weight="1.0"
             android:gestureStrokeType="multiple" >
-
-            <TextView
-                android:id="@+id/recentLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.0"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
         </android.gesture.GestureOverlayView>
 
         <android.inputmethodservice.KeyboardView
@@ -48,20 +41,19 @@
             style="@style/default_button"
             android:src="@drawable/switch_selector" />
 
+        <!--<ToggleButton-->
+            <!--android:id="@+id/symbolSwitch"-->
+            <!--style="@style/default_button"-->
+            <!--android:layout_marginTop="5dip"-->
+            <!--android:textColor="@color/text_selector"-->
+            <!--android:textOff="@string/special"-->
+            <!--android:textOn="@string/special" />-->
+
         <ImageButton
             android:id="@+id/deleteKey"
             style="@style/default_button"
             android:layout_weight="0.8"
             android:src="@drawable/delete_selector" />
-
-
-        <ToggleButton
-            android:id="@+id/symbolSwitch"
-            style="@style/default_button"
-            android:layout_marginTop="5dip"
-            android:textColor="@color/text_selector"
-            android:textOff="@string/special"
-            android:textOn="@string/special" />
 
         <ImageButton
             android:id="@+id/spaceKey"

@@ -15,10 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import pl.scribedroid.R;
-import pl.scribedroid.input.Utils;
-import pl.scribedroid.input.classificator.Classificator;
-import roboguice.test.RobolectricRoboTestRunner;
 import android.app.Activity;
 import android.content.Context;
 import android.gesture.Gesture;
@@ -29,7 +25,7 @@ import android.gesture.GestureStroke;
 import android.graphics.Bitmap;
 import android.util.Pair;
 
-@RunWith(RobolectricRoboTestRunner.class)
+@RunWith(RobolectricGradleTestRunner.class)
 public class NetworkTest {
 	Context context;
 

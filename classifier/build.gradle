@@ -3,19 +3,23 @@ import org.apache.tools.ant.taskdefs.condition.Os
 buildscript {
     repositories {
         mavenCentral()
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
 
 apply plugin: 'android-library'
-
-repositories {
-    mavenCentral()
-}
+apply plugin: 'android-test'
 
 dependencies {
+    repositories {
+        mavenCentral()
+    }
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.squareup.dagger:dagger-compiler:1.1.0'
     compile 'com.squareup.dagger:dagger:1.1.0'
@@ -27,6 +31,10 @@ dependencies {
     new File("$nativeLibs/native-libs.jar").createNewFile()
 
     compile files('libs/native-libs.jar')
+
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.robolectric:robolectric:2.1.+'
+    testCompile 'com.squareup:fest-android:1.0.+'
 }
 
 android {

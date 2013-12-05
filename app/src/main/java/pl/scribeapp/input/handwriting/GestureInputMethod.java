@@ -37,7 +37,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 	ImageButton deleteKey;
 	ImageButton enterKey;
 	ImageButton spaceKey;
-	ToggleButton symbolSwitch;
 	KeyboardView supportSymbolKeyboardView;
 	GestureOverlayView gestureView;
 	ImageButton keyboardSwitch;
@@ -65,7 +64,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		deleteKey = (ImageButton) inputView.findViewById(R.id.deleteKey);
 		enterKey = (ImageButton) inputView.findViewById(R.id.enterKey);
 		spaceKey = (ImageButton) inputView.findViewById(R.id.spaceKey);
-		symbolSwitch = (ToggleButton) inputView.findViewById(R.id.symbolSwitch);
 		supportSymbolKeyboardView = (KeyboardView) inputView.findViewById(R.id.support_keyboard);
 		gestureView = (GestureOverlayView) inputView.findViewById(R.id.gesture_overlay);
 		keyboardSwitch = (ImageButton) inputView.findViewById(R.id.keyboardToggle);
@@ -75,7 +73,6 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		enterKey.setOnClickListener(this);
 		enterKey.setOnLongClickListener(this);
 		spaceKey.setOnClickListener(this);
-		symbolSwitch.setOnClickListener(this);
 		keyboardSwitch.setOnClickListener(this);
 
 		gestureView.addOnGestureListener(new WordRecognizer(this));
@@ -120,18 +117,7 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 		return true;
 	}
 
-	/**
-	 * Obsługuje wciśnięcie przycisków: - zmiany widoku - przycisku Delete -
-	 * zmiany typu rozpoznawanych gestów - pokazania/schowania klawiatury z
-	 * symbolami - przycisku Spacja - przycisku Return
-	 * 
-	 * @see android.view.View.OnClickListener#onClick(android.view.View)
-	 */
 	public void onClick(View v) {
-		if (v.getId() == R.id.typeSwitch) {
-			current_mode++;
-			if (current_mode >= modes.length) current_mode = 0;
-		}
 		if (v.getId() == R.id.deleteKey) {
 			Log.d(TAG, "delete key");
 			service.delete();
@@ -145,22 +131,12 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 			Log.d(TAG, "space key");
 			service.enterCharacter('\u0020');
 		}
-		if (v.getId() == R.id.symbolSwitch) {
-			showSymbols(symbolSwitch.isChecked());
-		}
 		if (v.getId() == R.id.keyboardToggle) {
 			Log.i(TAG, "Input switch requested");
 			service.switchInputMethod();
 		}
 	}
 
-	/**
-	 * Pokazuje lub chowa klawiaturę z symbolami
-	 * 
-	 * @param visible
-	 *            true, jeśli klawiatura ma być widoczna, false w przeciwnym
-	 *            przypadku
-	 */
 	private void showSymbols(boolean visible) {
 		if (visible) {
 			supportSymbolKeyboardView.setVisibility(View.VISIBLE);
@@ -170,12 +146,10 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 			supportSymbolKeyboardView.setVisibility(View.GONE);
 			gestureView.setVisibility(View.VISIBLE);
 		}
-		symbolSwitch.setChecked(visible);
 	}
 
     void setButtonsState(boolean state) {
         keyboardSwitch.setEnabled(state);
-        symbolSwitch.setEnabled(state);
         deleteKey.setEnabled(state);
         spaceKey.setEnabled(state);
         enterKey.setEnabled(state);
