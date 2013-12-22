@@ -5,7 +5,7 @@ import java.util.List;
 import pl.scribeapp.R;
 import pl.scribeapp.input.dictionary.SuggestionManager;
 import pl.scribeapp.input.dictionary.TrigramDatabase;
-import pl.scribeapp.input.handwriting.GestureInputMethod;
+import pl.scribeapp.input.handwriting.HandwritingInputMethod;
 import pl.scribeapp.input.keyboard.KeyboardInputMethod;
 import pl.scribeapp.input.suggestions.SuggestionView;
 
@@ -27,7 +27,7 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	SuggestionView suggestionView;
 
 	private InputMethodController currentInputMethod;
-	private GestureInputMethod gestureInputMethod;
+	private HandwritingInputMethod handwritingInputMethod;
 	private InputMethodController keyboardInputMethod;
 
 	private boolean completion_on;
@@ -64,9 +64,9 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	@Override
 	public View onCreateInputView() {
 		
-		gestureInputMethod = new GestureInputMethod(this);
+		handwritingInputMethod = new HandwritingInputMethod(this);
 		keyboardInputMethod = new KeyboardInputMethod(this);
-		currentInputMethod = gestureInputMethod;
+		currentInputMethod = handwritingInputMethod;
 
 		return currentInputMethod.inputView;
 	}
@@ -289,8 +289,8 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	}
 
 	public void switchInputMethod() {
-		if (currentInputMethod == gestureInputMethod) currentInputMethod = keyboardInputMethod;
-		else if (currentInputMethod == keyboardInputMethod) currentInputMethod = gestureInputMethod;
+		if (currentInputMethod == handwritingInputMethod) currentInputMethod = keyboardInputMethod;
+		else if (currentInputMethod == keyboardInputMethod) currentInputMethod = handwritingInputMethod;
 		setInputView(currentInputMethod.inputView);
 		currentInputMethod.resetModifiers();
 	}

@@ -30,7 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class GestureInputMethod extends InputMethodController implements OnClickListener,
+public class HandwritingInputMethod extends InputMethodController implements OnClickListener,
 		OnLongClickListener {
 	private static final String TAG = "GestureInput";
 
@@ -58,7 +58,7 @@ public class GestureInputMethod extends InputMethodController implements OnClick
 	 * Konstruktor inicjuje elementy widoku i ładuje klasyfikatory. Wymaga
 	 * podania klasy ScribeInputService, z którą będzie powiązany.
 	 */
-	public GestureInputMethod(ScribeInputService s) {
+	public HandwritingInputMethod(ScribeInputService s) {
 		super(s, R.layout.gesture_input_view);
 
 		deleteKey = (ImageButton) inputView.findViewById(R.id.deleteKey);

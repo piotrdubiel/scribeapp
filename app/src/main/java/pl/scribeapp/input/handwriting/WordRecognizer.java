@@ -16,14 +16,15 @@ public class WordRecognizer implements GestureOverlayView.OnGestureListener {
 
     private static final String TAG = "WordRecognizer";
     private CommitTextTask current_task;
-    private GestureInputMethod inputMethod;
+    private HandwritingInputMethod inputMethod;
     private String current_result;
     private Object recognition_lock = new Object();
 
     private ClassificationHandler classificationHandler;
 
-    public WordRecognizer(GestureInputMethod inputMethod) {
+    public WordRecognizer(HandwritingInputMethod inputMethod) {
         this.inputMethod = inputMethod;
+        classificationHandler = new ClassificationHandler(inputMethod.service);
     }
 
     public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
@@ -58,8 +59,7 @@ public class WordRecognizer implements GestureOverlayView.OnGestureListener {
 
         @Override
         protected String doInBackground(Gesture... gestures) {
-            //classHandler.classify(gestures[0], modes[current_mode]).best().label.toString();
-            return new RemoteClassifier().classify(gestures[0]);
+            return classificationHandler.classify(gestures[0]);
         }
 
         @Override

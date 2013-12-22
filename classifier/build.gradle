@@ -72,8 +72,6 @@ task buildNative(type: Exec) {
 
 tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNative }
 
-clean.dependsOn 'cleanPackageNative'
-
 tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
     pkgTask.jniDir new File(buildDir, 'native-libs')
 }
