@@ -1,4 +1,4 @@
-package pl.scribedroid.input.ann;
+package pl.scribeapp.test.input.ann;
 
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
@@ -25,6 +25,12 @@ import android.gesture.GestureStroke;
 import android.graphics.Bitmap;
 import android.util.Pair;
 
+import pl.scribeapp.classifier.Classifier;
+import pl.scribeapp.test.RobolectricGradleTestRunner;
+import pl.scribeapp.classifier.ann.NetworkImpl;
+
+import pl.scribeapp.classifier.R;
+
 @RunWith(RobolectricGradleTestRunner.class)
 public class NetworkTest {
 	Context context;
@@ -37,7 +43,7 @@ public class NetworkTest {
 	@Test
 	public void testNetworkLoad() {
 		// when
-		NetworkImpl alphaNet = NetworkImpl.createFromRawResource(context, R.raw.alphanet, Classificator.SMALL_ALPHA);
+		NetworkImpl alphaNet = NetworkImpl.createFromRawResource(context, R.raw.alphanet, Classifier.SMALL_ALPHA);
 		
 		// then
 		Assert.assertNotNull(alphaNet);

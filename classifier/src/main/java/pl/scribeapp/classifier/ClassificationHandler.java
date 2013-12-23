@@ -18,6 +18,6 @@ public class ClassificationHandler {
     }
 
     public String classify(Gesture gesture) {
-
+        return null;
     }
 }

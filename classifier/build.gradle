@@ -8,7 +8,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.6.+'
+        classpath 'com.android.tools.build:gradle:0.7.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
@@ -65,13 +65,15 @@ task buildNative(type: Exec) {
         if (Os.isFamily(Os.FAMILY_WINDOWS)) {
             base_command += '.cmd'
         }
-	    def ndkBuild = new File(System.env.NDK_ROOT, base_command)
-		executable ndkBuild
+	    ndk_build = new File(System.env.NDK_ROOT, base_command)
+    }
+    else {
+        commandLine 'ndk-build'
     }
 }
 
 tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNative }
 
 tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
-    pkgTask.jniDir new File(buildDir, 'native-libs')
+    pkgTask.jniFolders = [new File(buildDir, 'native-libs')]
 }

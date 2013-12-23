@@ -30,6 +30,7 @@ proguard/
 
 # Gradle
 .gradle/
+gradle/
 
 
 # NDK
