@@ -1,13 +1,6 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots/'
-        }
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
-        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
     }
 }
 
@@ -19,7 +12,7 @@ repositories {
 
 dependencies {
     compile project(':classifier')
-    compile 'com.android.support:appcompat-v7:19.0.0'
+    compile 'com.android.support:appcompat-v7:19x.0.0'
 }
 
 android {
@@ -38,5 +31,9 @@ android {
             packageNameSuffix ".debug"
         }
 
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }

@@ -23,7 +23,7 @@
     <string name="ime_name">ScribeApp Input</string>
 
     <!-- Symbols that are commonly considered word separators in this language -->
-
+    <string name="word_separators">\u0020.,;:!?\n()[]*&amp;@{}/&lt;&gt;_+=|&quot;</string>
 
     <!-- Labels on soft keys -->
     <string name="shiftKey">Shift</string>
@@ -82,7 +82,6 @@
         <item name="1000">1000</item>
     </string-array>
 
-    <string name="word_separators">\u0020.,;:!?\n()[]*&amp;@{}/&lt;&gt;_+=|&quot;</string>
     <string name="remove_word">Remove whole word</string>
     <string name="autoOn">Auto</string>
     <string name="dict_notification_title_text">Creating dictionary from file</string>

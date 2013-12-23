@@ -2,19 +2,22 @@ package pl.scribeapp.classifier.net;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.BasicHttpEntity;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.entity.FileEntity;
+import org.apache.http.entity.InputStreamEntity;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -22,18 +25,36 @@ import java.util.List;
  */
 public class HerokuConnector implements ServiceConnector {
     private static final String URI = "http://scribe-server.herokuapp.com";
+    private String token;
+
+    public HerokuConnector() {}
+
+    public HerokuConnector(String token) {
+        this.token = token;
+    }
 
     @Override
-    public String request(String action, String data) throws IOException {
+    public String request(String action, HashMap<String, String> data) throws IOException {
         HttpClient client = new DefaultHttpClient();
-            HttpPost request = new HttpPost(URI + "/" + action);
-            List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-            params.add(new BasicNameValuePair("id", "12345"));
-            params.add(new BasicNameValuePair("data", "2435345345"));
-            request.setEntity(new UrlEncodedFormEntity(params));
+        HttpPost request = new HttpPost(URI + "/" + action);
+        //data.put("token", TOKEN);
 
-            HttpResponse response = client.execute(request);
-            return readResponse(response);
+        //request.setEntity(new StringEntity(json));
+
+        HttpResponse response = client.execute(request);
+        return readResponse(response);
+    }
+
+    @Override
+    public String request(String action, byte[] data) throws IOException {
+        HttpClient client = new DefaultHttpClient();
+        HttpPost request = new HttpPost(URI + "/" + action);
+        List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+
+        request.setEntity(new ByteArrayEntity(data));
+
+        HttpResponse response = client.execute(request);
+        return readResponse(response);
     }
 
     private String readResponse(HttpResponse response) throws IOException {
@@ -44,5 +65,13 @@ public class HerokuConnector implements ServiceConnector {
             data_builder.append(line);
         }
         return data_builder.toString();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
