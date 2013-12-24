@@ -1,6 +1,7 @@
 package pl.scribeapp.classifier.net;
 
 import android.util.Base64;
+import android.util.Log;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -12,7 +13,9 @@ import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -28,7 +31,7 @@ import java.util.List;
  * Created by piotrekd on 11/25/13.
  */
 public class HerokuConnector implements ServiceConnector {
-    private static String URI = "http://scribe-server.herokuapp.com";
+    private static String URI = "http://scribe-server.herokuapp.com/api/";
     private String token;
 
     public HerokuConnector() {}
@@ -52,9 +55,9 @@ public class HerokuConnector implements ServiceConnector {
     @Override
     public String request(String action, byte[] data) throws IOException {
         HttpClient client = new DefaultHttpClient();
-        HttpPost request = new HttpPost(URI + "/" + action);
+        HttpPost request = new HttpPost(URI + action);
         List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-        byte[] image_b64 = Base64.encode(data, Base64.DEFAULT);
+        String image_b64 = Base64.encodeToString(data, Base64.DEFAULT);
         JSONObject json = new JSONObject();
         try {
             json.put("token", "asd");
@@ -62,7 +65,10 @@ public class HerokuConnector implements ServiceConnector {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        request.setEntity(new StringEntity(json.toString()));
+        StringEntity se = new StringEntity(json.toString());
+        se.setContentType(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+        request.setEntity(se);
+        Log.d("POST", URI + " -> " + json.toString());
 
         HttpResponse response = client.execute(request);
         return readResponse(response);

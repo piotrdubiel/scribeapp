@@ -21,7 +21,7 @@ public class RemoteClassifier implements Classifier {
     ServiceConnector serviceConnector;
 
     public RemoteClassifier() {
-        serviceConnector = new LocalConnector();
+        serviceConnector = new HerokuConnector();
     }
 
     @Override
