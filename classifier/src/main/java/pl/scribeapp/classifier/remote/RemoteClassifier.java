@@ -11,6 +11,7 @@ import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.Utils;
 import pl.scribeapp.classifier.net.HerokuConnector;
+import pl.scribeapp.classifier.net.LocalConnector;
 import pl.scribeapp.classifier.net.ServiceConnector;
 
 /**
@@ -20,7 +21,7 @@ public class RemoteClassifier implements Classifier {
     ServiceConnector serviceConnector;
 
     public RemoteClassifier() {
-        serviceConnector = new HerokuConnector();
+        serviceConnector = new LocalConnector();
     }
 
     @Override

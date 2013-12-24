@@ -1,5 +1,7 @@
 package pl.scribeapp.classifier.net;
 
+import android.util.Base64;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -11,6 +13,8 @@ import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,7 +28,7 @@ import java.util.List;
  * Created by piotrekd on 11/25/13.
  */
 public class HerokuConnector implements ServiceConnector {
-    private static final String URI = "http://scribe-server.herokuapp.com";
+    private static String URI = "http://scribe-server.herokuapp.com";
     private String token;
 
     public HerokuConnector() {}
@@ -50,8 +54,15 @@ public class HerokuConnector implements ServiceConnector {
         HttpClient client = new DefaultHttpClient();
         HttpPost request = new HttpPost(URI + "/" + action);
         List<NameValuePair> params = new ArrayList<NameValuePair>(2);
-
-        request.setEntity(new ByteArrayEntity(data));
+        byte[] image_b64 = Base64.encode(data, Base64.DEFAULT);
+        JSONObject json = new JSONObject();
+        try {
+            json.put("token", "asd");
+            json.put("data", image_b64);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        request.setEntity(new StringEntity(json.toString()));
 
         HttpResponse response = client.execute(request);
         return readResponse(response);

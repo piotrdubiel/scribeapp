@@ -17,13 +17,13 @@ public class ClassificationResult {
 	/**
 	 * Lista rezultatów rozpoznawania
 	 */
-	ArrayList<Label> result;
+	public ArrayList<Label> result;
 	
 	/**
 	 * Typ klasyfikatora, który utworzył ten rezultat.
 	 * @see Classifier
 	 */
-	int type;
+	public int type;
 
 	public ClassificationResult(float[] in, int type) {
 		result = new ArrayList<Label>();
@@ -175,7 +175,7 @@ public class ClassificationResult {
 
 	}
 
-	static class CharacterComparator implements Comparator<Label> {
+	public static class CharacterComparator implements Comparator<Label> {
 		private Collator c = Collator.getInstance(new Locale("pl", "PL"));
 
 		@Override

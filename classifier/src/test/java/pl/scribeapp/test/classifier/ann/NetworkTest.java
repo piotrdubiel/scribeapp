@@ -1,4 +1,4 @@
-package pl.scribeapp.test.input.ann;
+package pl.scribeapp.test.classifiet.ann;
 
 import java.io.DataInputStream;
 import java.io.FileNotFoundException;
