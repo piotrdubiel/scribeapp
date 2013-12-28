@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import pl.scribeapp.classifier.ClassificationHandler;
-import pl.scribeapp.classifier.remote.RemoteClassifier;
 
 /**
  * Created by piotrek on 27.11.13.

@@ -1,34 +1,25 @@
 package pl.scribeapp.input.handwriting;
 
 import pl.scribeapp.R;
-import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.MetaClassifier;
-import pl.scribeapp.classifier.remote.RemoteClassifier;
 import pl.scribeapp.input.InputMethodController;
 import pl.scribeapp.input.ScribeInputService;
 import pl.scribeapp.settings.SettingsActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.gesture.Gesture;
 import android.gesture.GestureOverlayView;
-import android.gesture.GestureOverlayView.OnGestureListener;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.KeyboardView.OnKeyboardActionListener;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ToggleButton;
 
 public class HandwritingInputMethod extends InputMethodController implements OnClickListener,
 		OnLongClickListener {
