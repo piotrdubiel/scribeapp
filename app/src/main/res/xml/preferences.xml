@@ -4,6 +4,11 @@
     <PreferenceCategory
         android:key="recognition_category"
         android:title="@string/recognition_cat_title" >
+        <PreferenceScreen
+            android:title="@string/preferences_login_lb" >
+            <intent android:action="pl.scribeapp.settings.account.activity.AccountActivity" />
+        </PreferenceScreen>
+
         <ListPreference
             android:defaultValue="300"
             android:entries="@array/gestureInterval"

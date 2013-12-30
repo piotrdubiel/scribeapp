@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.scribeapp.classifier.Classifier;
-import pl.scribeapp.classifier.Utils;
-import pl.scribeapp.classifier.ClassificationResult;
-import pl.scribeapp.classifier.ClassificationResult.Label;
+import pl.scribeapp.classifier.artifacts.ClassificationResult;
+import pl.scribeapp.classifier.artifacts.LabelClassificationResult;
+import pl.scribeapp.classifier.utils.Utils;
+import pl.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -40,21 +41,20 @@ public class NetworkImpl implements Network {
 		}
 	}
 
-	@Override
-	public ClassificationResult classify(Gesture gesture, int type) {
+    @Override
+    public ClassificationResult classify(Gesture gesture) {
+        return null;
+    }
+
+    public ClassificationResult classify(Gesture gesture, int type) {
 		return null;
 	}
 
     @Override
-    public String classify(Gesture gesture) {
-        return null;
-    }
-
-    @Override
-	public ClassificationResult classify(float[] sample) {
+	public LabelClassificationResult classify(float[] sample) {
 		float[] y = classifyRaw(sample);
 		if ((type & Classifier.GROUP) == 0) {
-			return new ClassificationResult(y, type);
+			return new LabelClassificationResult(y, type);
 		}
 		else {
 			ArrayList<Label> result = new ArrayList<Label>();
@@ -81,7 +81,7 @@ public class NetworkImpl implements Network {
 					result.add(new Label(c, y[0]));
 
 			}
-			return new ClassificationResult(result, type);
+			return new LabelClassificationResult(result, type);
 		}
 	}
 

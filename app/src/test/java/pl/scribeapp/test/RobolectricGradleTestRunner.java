@@ -1,7 +1,13 @@
 package pl.scribeapp.test;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+
 import org.junit.runners.model.InitializationError;
 import org.robolectric.AndroidManifest;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.res.Fs;
@@ -11,7 +17,8 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
         super(testClass);
     }
 
-    @Override protected AndroidManifest getAppManifest(Config config) {
+    @Override
+    protected AndroidManifest getAppManifest(Config config) {
         String manifestProperty = System.getProperty("android.manifest");
         if (config.manifest().equals(Config.DEFAULT) && manifestProperty != null) {
             String resProperty = System.getProperty("android.resources");
@@ -20,5 +27,17 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
                     Fs.fileFromPath(assetsProperty));
         }
         return super.getAppManifest(config);
+    }
+
+    public static void startFragment(Fragment fragment) {
+        FragmentActivity activity = Robolectric.buildActivity(FragmentActivity.class)
+                .create()
+                .start()
+                .get();
+
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.add(fragment, null);
+        fragmentTransaction.commit();
     }
 }

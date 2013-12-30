@@ -3,7 +3,7 @@ package pl.scribeapp.settings;
 import java.util.ArrayList;
 import pl.scribeapp.R;
 import pl.scribeapp.input.Utils;
-import pl.scribeapp.classifier.GestureLibraryClassifier;
+import pl.scribeapp.classifier.gesture.GestureLibraryClassifier;
 import android.app.Activity;
 import android.gesture.Gesture;
 import android.gesture.GestureLibraries;

@@ -1,17 +1,7 @@
 package pl.scribeapp.input;
 
-import java.util.List;
-
-import pl.scribeapp.R;
-import pl.scribeapp.input.dictionary.SuggestionManager;
-import pl.scribeapp.input.dictionary.TrigramDatabase;
-import pl.scribeapp.input.handwriting.HandwritingInputMethod;
-import pl.scribeapp.input.keyboard.KeyboardInputMethod;
-import pl.scribeapp.input.suggestions.SuggestionView;
-
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.inputmethodservice.InputMethodService;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.HapticFeedbackConstants;
@@ -21,14 +11,32 @@ import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.Toast;
 
-public class ScribeInputService extends InputMethodService implements OnSharedPreferenceChangeListener {
+import java.util.Arrays;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import pl.scribeapp.R;
+import pl.scribeapp.input.dictionary.SuggestionManager;
+import pl.scribeapp.input.dictionary.TrigramDatabase;
+import pl.scribeapp.input.handwriting.HandwritingInputMethod;
+import pl.scribeapp.input.keyboard.KeyboardInputMethod;
+import pl.scribeapp.input.suggestions.SuggestionView;
+import pl.scribeapp.utils.U;
+import pl.scribeapp.utils.inject.InjectInputMethodService;
+
+public class ScribeInputService extends InjectInputMethodService implements OnSharedPreferenceChangeListener {
 	private static final String TAG = "ScribeInputService";
 
-	SuggestionView suggestionView;
+    SuggestionView suggestionView;
 
 	private InputMethodController currentInputMethod;
-	private HandwritingInputMethod handwritingInputMethod;
-	private InputMethodController keyboardInputMethod;
+
+    @Inject
+	HandwritingInputMethod handwritingInputMethod;
+
+    @Inject
+    KeyboardInputMethod keyboardInputMethod;
 
 	private boolean completion_on;
 	private boolean completion_settings;
@@ -37,24 +45,29 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	
 	private SuggestionManager suggest;
 
-	
 	private TrigramDatabase trigram_database;
 
 	StringBuilder composing_text = new StringBuilder();
 
 	String word_separators;
 
-	/** 
+    protected List<Object> getModules() {
+        return U.NO_MODULES;
+    }
+
+    /**
 	 * Ładuje ustawienia i inicjuje pomocnicze narzędzia: słownik, bazę trigramów.
 	 * @see android.inputmethodservice.InputMethodService#onCreate()
 	 */
 	@Override
 	public void onCreate() {
-		super.onCreate();
-		PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
-		loadPreferences();		
-		trigram_database = new TrigramDatabase(this);
+        super.onCreate();
+        Log.d("Modules", Arrays.toString(getModules().toArray()));
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+        loadPreferences();
+        trigram_database = new TrigramDatabase(this);
         word_separators = getResources().getString(R.string.word_separators);
+
 	}
 	
 	/** 
@@ -63,10 +76,8 @@ public class ScribeInputService extends InputMethodService implements OnSharedPr
 	 */
 	@Override
 	public View onCreateInputView() {
-		
-		handwritingInputMethod = new HandwritingInputMethod(this);
-		keyboardInputMethod = new KeyboardInputMethod(this);
 		currentInputMethod = handwritingInputMethod;
+        handwritingInputMethod.initWithService(this, R.layout.gesture_input_view);
 
 		return currentInputMethod.inputView;
 	}

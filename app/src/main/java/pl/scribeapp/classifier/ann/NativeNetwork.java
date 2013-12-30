@@ -4,7 +4,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
-import pl.scribeapp.classifier.ClassificationResult;
+import pl.scribeapp.classifier.artifacts.ClassificationResult;
+import pl.scribeapp.classifier.artifacts.LabelClassificationResult;
 import android.gesture.Gesture;
 
 public class NativeNetwork implements Network {
@@ -12,7 +13,6 @@ public class NativeNetwork implements Network {
 		System.loadLibrary("ann");
 	}
 
-	@SuppressWarnings("unused")
 	private int network;
 
 	@Override
@@ -39,18 +39,17 @@ public class NativeNetwork implements Network {
 		return null;
 	}
 
-	@Override
-	public ClassificationResult classify(Gesture gesture, int type) {
+	public LabelClassificationResult classify(Gesture gesture, int type) {
 		return null;
 	}
 
     @Override
-    public String classify(Gesture gesture) {
+    public ClassificationResult classify(Gesture gesture) {
         return null;
     }
 
     @Override
-	public ClassificationResult classify(float[] sample) {
+	public LabelClassificationResult classify(float[] sample) {
 		// TODO Auto-generated method stub
 		return null;
 	}

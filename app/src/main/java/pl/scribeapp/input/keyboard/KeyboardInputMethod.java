@@ -13,6 +13,8 @@ import android.inputmethodservice.KeyboardView;
 import android.util.Log;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 public class KeyboardInputMethod extends InputMethodController implements
 		KeyboardView.OnKeyboardActionListener {
 	private static final String TAG = "KeyboardInputMethod";
@@ -41,21 +43,27 @@ public class KeyboardInputMethod extends InputMethodController implements
 	 * Wymaga podania klasy ScribeInputService, z którą będzie powiązany.
 	 * @param s
 	 */
-	public KeyboardInputMethod(ScribeInputService s) {
-		super(s, R.layout.standard_keyboard);
-		keyboard_view = (KeyboardView) inputView.findViewById(R.id.keyboard);
+    @Inject
+    public KeyboardInputMethod() {
+		super();
+    }
 
-		alpha_keyboard = new StandardKeyboard(service, R.xml.qwerty_keyboard);
-		symbols_keyboard = new StandardKeyboard(service, R.xml.symbols_keyboard);
-		symbols_shift_keyboard = new StandardKeyboard(service, R.xml.symbols_shift_keyboard);
-
+    @Override
+    public void initWithService(ScribeInputService service, int viewId) {
+        super.initWithService(service, viewId);
         word_separators = inputView.getResources().getString(R.string.word_separators);
 
-		keyboard_view.setKeyboard(alpha_keyboard);
-		keyboard_view.setOnKeyboardActionListener(this);
-	}
+        keyboard_view = (KeyboardView) inputView.findViewById(R.id.keyboard);
 
-	/**
+        alpha_keyboard = new StandardKeyboard(service, R.xml.qwerty_keyboard);
+        symbols_keyboard = new StandardKeyboard(service, R.xml.symbols_keyboard);
+        symbols_shift_keyboard = new StandardKeyboard(service, R.xml.symbols_shift_keyboard);
+
+        keyboard_view.setKeyboard(alpha_keyboard);
+        keyboard_view.setOnKeyboardActionListener(this);
+    }
+
+    /**
 	 * Resetuje stan klawisza Shift.
 	 * @see pl.scribeapp.input.InputMethodController#resetModifiers()
 	 */

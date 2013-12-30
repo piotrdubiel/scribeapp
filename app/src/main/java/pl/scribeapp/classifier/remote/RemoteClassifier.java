@@ -1,44 +1,28 @@
 package pl.scribeapp.classifier.remote;
 
 import android.gesture.Gesture;
-import android.graphics.Bitmap;
-import android.util.Log;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import javax.inject.Inject;
 
-import pl.scribeapp.classifier.ClassificationResult;
 import pl.scribeapp.classifier.Classifier;
-import pl.scribeapp.classifier.Utils;
-import pl.scribeapp.utils.net.HerokuConnector;
-import pl.scribeapp.utils.net.LocalConnector;
-import pl.scribeapp.utils.net.ServiceConnector;
+import pl.scribeapp.classifier.artifacts.ClassificationRequest;
+import pl.scribeapp.classifier.artifacts.ClassificationResult;
+import pl.scribeapp.connection.ServiceConnector;
+import pl.scribeapp.connection.exceptions.RecognitionException;
 
 /**
  * Created by piotrekd on 11/22/13.
  */
 public class RemoteClassifier implements Classifier {
+    @Inject
     ServiceConnector serviceConnector;
 
     public RemoteClassifier() {
-        serviceConnector = new LocalConnector();
     }
 
     @Override
-    public ClassificationResult classify(Gesture gesture, int type) {
-        return null;
-    }
-
-    @Override
-    public String classify(Gesture gesture) {
-        ByteArrayOutputStream os = new ByteArrayOutputStream();
-        Utils.getBitmapFromGesture(gesture).compress(Bitmap.CompressFormat.PNG, 100, os);
-        try {
-            return serviceConnector.request("recognize", os.toByteArray());
-        } catch (IOException e) {
-            Log.e("REMOTE_CONNECTOR", e.getMessage());
-            return "asfasf";
-        }
+    public ClassificationResult classify(Gesture gesture) throws RecognitionException {
+        return serviceConnector.recognize(new ClassificationRequest(gesture));
     }
 
     @Override

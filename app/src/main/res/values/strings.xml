@@ -67,5 +67,8 @@
     <string name="remove_word">Remove whole word</string>
     <string name="autoOn">Auto</string>
     <string name="dict_notification_title_text">Creating dictionary from file</string>
+    <string name="logout_title">Logged in as:</string>
+    <string name="logout_btn">Log out</string>
+    <string name="preferences_login_lb">Account</string>
 
 </resources>

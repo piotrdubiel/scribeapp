@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import javax.inject.Inject;
+
 import pl.scribeapp.classifier.ClassificationHandler;
 
 /**
@@ -19,11 +21,8 @@ public class WordRecognizer implements GestureOverlayView.OnGestureListener {
     private String current_result;
     private Object recognition_lock = new Object();
 
-    private ClassificationHandler classificationHandler;
-
     public WordRecognizer(HandwritingInputMethod inputMethod) {
         this.inputMethod = inputMethod;
-        classificationHandler = new ClassificationHandler(inputMethod.service);
     }
 
     public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
@@ -58,7 +57,7 @@ public class WordRecognizer implements GestureOverlayView.OnGestureListener {
 
         @Override
         protected String doInBackground(Gesture... gestures) {
-            return classificationHandler.classify(gestures[0]);
+            return inputMethod.classificationHandler.classify(gestures[0]);
         }
 
         @Override
