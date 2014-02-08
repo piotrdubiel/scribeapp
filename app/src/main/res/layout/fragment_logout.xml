@@ -11,24 +11,24 @@
         android:text="@string/logout_title" />
 
     <TextView
-        android:id="@+id/logout_username_lb"
+        android:id="@+id/id_tv_logout_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <!--<TextView-->
-        <!--android:id="@+id/logout_token_lb"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
+    <TextView
+        android:id="@+id/id_tv_logout_token"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <!--<Button-->
-        <!--android:id="@+id/logout_btn"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="@string/logout_btn" />-->
+    <Button
+        android:id="@+id/id_btn_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/logout_btn" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/logout_token_iv"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center" />-->
+    <ImageView
+        android:id="@+id/id_iv_logout_token"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 </LinearLayout>

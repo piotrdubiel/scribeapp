@@ -17,7 +17,7 @@ import pl.scribeapp.R;
 public class LogoutFragment extends BaseAccountFragment {
 //    @InjectView(R.id.logout_btn)
     public Button logoutButton;
-    @InjectView(R.id.logout_username_lb)
+    @InjectView(R.id.id_tv_logout_username)
     public  TextView usernameLabel;
 //    @InjectView(R.id.logout_token_lb)
     public  TextView tokenLabel;

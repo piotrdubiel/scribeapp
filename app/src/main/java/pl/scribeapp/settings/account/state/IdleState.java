@@ -31,7 +31,7 @@ public class IdleState extends AccountActivityState implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.login_sign_btn:
+            case R.id.id_btn_login_sign:
                 stateContext.setState(new LoggingState());
                 break;
         }

@@ -24,6 +24,7 @@ dependencies {
     compile 'com.squareup.dagger:dagger-compiler:1.2.0'
     compile 'com.squareup.dagger:dagger:1.2.0'
     compile 'com.jakewharton:butterknife:4.0.1'
+    compile 'com.squareup.okhttp:okhttp:1.3.0'
 
     def nativeLibs = new File("$buildDir/native-libs")
     if (!nativeLibs.exists()) {
@@ -82,7 +83,7 @@ task copyNative(type: Jar, dependsOn: 'makeNative') {
 }
 
 task makeNative(type: Exec) {
-    description "Builds NDK with BLAS included"
+    description "Builds NDK"
     workingDir "${project.projectDir}/jni/"
 
     if (System.env.NDK_ROOT != null) {

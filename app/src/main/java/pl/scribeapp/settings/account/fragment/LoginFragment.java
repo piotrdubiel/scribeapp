@@ -15,11 +15,11 @@ import pl.scribeapp.R;
  * Created by piotrekd on 1/5/14.
  */
 public class LoginFragment extends BaseAccountFragment {
-    @InjectView(R.id.login_email_fd)
+    @InjectView(R.id.id_et_login_email)
     public EditText emailField;
-    @InjectView(R.id.login_password_fd)
+    @InjectView(R.id.id_et_login_password)
     public EditText passwordField;
-    @InjectView(R.id.login_sign_btn)
+    @InjectView(R.id.id_btn_login_sign)
     public Button loginButton;
 
 
