@@ -15,13 +15,13 @@ import pl.scribeapp.R;
  * Created by piotrekd on 1/5/14.
  */
 public class LogoutFragment extends BaseAccountFragment {
-//    @InjectView(R.id.logout_btn)
+    @InjectView(R.id.id_btn_logout)
     public Button logoutButton;
     @InjectView(R.id.id_tv_logout_username)
     public  TextView usernameLabel;
-//    @InjectView(R.id.logout_token_lb)
+    @InjectView(R.id.id_tv_logout_token)
     public  TextView tokenLabel;
-//    @InjectView(R.id.logout_token_iv)
+    @InjectView(R.id.id_iv_logout_token)
     public ImageView imageView;
 
     @Override

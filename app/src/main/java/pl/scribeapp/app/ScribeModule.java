@@ -7,6 +7,7 @@ import dagger.Provides;
 import pl.scribeapp.classifier.ClassifierModule;
 import pl.scribeapp.classifier.remote.RemoteClassifier;
 import pl.scribeapp.connection.ConnectionModule;
+import pl.scribeapp.input.ScribeInputService;
 import pl.scribeapp.input.handwriting.HandwritingInputMethod;
 import pl.scribeapp.input.keyboard.KeyboardInputMethod;
 import pl.scribeapp.settings.account.activity.AccountActivity;
@@ -33,7 +34,8 @@ import pl.scribeapp.utils.SessionLoader;
                 LoggingState.class,
                 LoggedInState.class,
                 SessionLoader.class,
-                RemoteClassifier.class
+                RemoteClassifier.class,
+                ScribeInputService.class
         }
 )
 public class ScribeModule {

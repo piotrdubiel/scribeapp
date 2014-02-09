@@ -34,10 +34,10 @@ public class LoggedInState extends AccountActivityState implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-//        if (v.getId() == R.id.logout_btn) {
-//            navigator.setSession(null);
-//            stateContext.setState(new IdleState());
-//        }
+        if (v.getId() == R.id.id_btn_logout) {
+            navigator.setSession(null);
+            stateContext.setState(new IdleState());
+        }
     }
 
     @Override

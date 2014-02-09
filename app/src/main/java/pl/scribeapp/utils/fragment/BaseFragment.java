@@ -20,7 +20,7 @@ public class BaseFragment extends Fragment {
     }
 
     public void setFragmentViewCreatedListener(FragmentViewCreatedListener fragmentViewCreatedListener) {
-        fragmentViewCreatedListener = fragmentViewCreatedListener;
+        this.fragmentViewCreatedListener = fragmentViewCreatedListener;
     }
 
     public void clearOnFragmentCreatedListener() {
