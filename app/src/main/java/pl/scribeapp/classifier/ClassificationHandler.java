@@ -20,7 +20,10 @@ public class ClassificationHandler {
     @Inject
     public MetaClassifier metaClassifier;
 
-    public ClassificationHandler() {}
+    @Inject
+    public ClassificationHandler() {
+        int x = 4;
+    }
 
     public String classify(Gesture gesture) {
         try {

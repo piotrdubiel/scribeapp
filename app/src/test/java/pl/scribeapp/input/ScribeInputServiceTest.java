@@ -9,14 +9,14 @@ import javax.inject.Inject;
 
 import pl.scribeapp.test.RobolectricGradleTestRunner;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertNotNull;
 import static pl.scribeapp.test.TestInject.injectMocks;
 
 /**
  * Created by piotrekd on 1/2/14.
  */
 @RunWith(RobolectricGradleTestRunner.class)
-public class InputMethodServiceTest {
+public class ScribeInputServiceTest {
     @Inject
     ScribeInputService scribeInputService;
 
@@ -32,6 +32,8 @@ public class InputMethodServiceTest {
         assertNotNull(scribeInputService.handwritingInputMethod);
         assertNotNull(scribeInputService.keyboardInputMethod);
         assertNotNull(scribeInputService.handwritingInputMethod.classificationHandler);
+        assertNotNull(scribeInputService.handwritingInputMethod.classificationHandler.remoteClassifier);
+        assertNotNull(scribeInputService.handwritingInputMethod.classificationHandler.metaClassifier);
     }
 
 }

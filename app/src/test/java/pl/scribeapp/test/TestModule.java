@@ -12,7 +12,7 @@ import pl.scribeapp.classifier.ann.NetworkTest;
 import pl.scribeapp.classifier.remote.RemoteClassifier;
 import pl.scribeapp.classifier.remote.RemoteClassifierTest;
 import pl.scribeapp.connection.ServiceConnector;
-import pl.scribeapp.input.InputMethodServiceTest;
+import pl.scribeapp.input.ScribeInputServiceTest;
 import pl.scribeapp.input.handwriting.HandwritingInputMethodTest;
 import pl.scribeapp.settings.account.state.LoggingStateTest;
 import pl.scribeapp.utils.SessionLoaderTest;
@@ -25,7 +25,7 @@ import static org.mockito.Mockito.mock;
                 RemoteClassifierTest.class,
                 NetworkTest.class,
                 HandwritingInputMethodTest.class,
-                InputMethodServiceTest.class,
+                ScribeInputServiceTest.class,
                 SessionLoaderTest.class,
         },
         includes = ScribeModule.class,
