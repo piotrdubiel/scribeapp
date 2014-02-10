@@ -39,8 +39,8 @@ public class LoggingState extends AccountActivityState implements Lockable, Conn
     }
 
     @Override
-    public void onError() {
-        stateContext.setState(new LoginFailureState(""));
+    public void onError(String message) {
+        stateContext.setState(new LoginFailureState(message));
     }
 
     @Override

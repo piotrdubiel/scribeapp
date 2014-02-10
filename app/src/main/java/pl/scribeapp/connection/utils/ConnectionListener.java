@@ -8,5 +8,5 @@ import pl.scribeapp.connection.Session;
 public interface ConnectionListener {
     void onOK(Session session);
 
-    void onError();
+    void onError(String message);
 }

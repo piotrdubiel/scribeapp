@@ -50,6 +50,26 @@ public class HerokuConnector implements ServiceConnector {
     }
 
     @Override
+    public Session register(String username, String password) throws Exception {
+        try {
+            HashMap<String,String> data = new HashMap<>();
+            data.put("email", username);
+            data.put("password", password);
+            HttpResponse response = RequestHandler.request(URI + "register", data);
+            int status = response.getStatusLine().getStatusCode();
+            if (status == HttpStatus.SC_OK) {
+                String token = RequestHandler.readResponse(response);
+                return new Session(username, token);
+            }
+            else {
+                throw new Exception();
+            }
+        } catch (IOException e) {
+            throw new Exception();
+        }
+    }
+
+    @Override
     public ClassificationResult recognize(ClassificationRequest request) throws RecognitionException {
         try {
             HttpResponse response = RequestHandler.request(URI + "recognize", request.toByteArray(), navigator.getSession().token);

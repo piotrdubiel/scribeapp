@@ -70,5 +70,8 @@
     <string name="logout_title">Logged in as:</string>
     <string name="logout_btn">Log out</string>
     <string name="preferences_login_lb">Account</string>
+    <string name="action_register">Register</string>
+    <string name="prompt_retype">Retype password</string>
+    <string name="title_activity_registration">Registration</string>
 
 </resources>

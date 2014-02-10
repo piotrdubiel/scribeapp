@@ -10,18 +10,20 @@ import android.widget.EditText;
 
 import butterknife.InjectView;
 import pl.scribeapp.R;
+import pl.scribeapp.utils.fragment.BaseFragment;
 
 /**
  * Created by piotrekd on 1/5/14.
  */
-public class LoginFragment extends BaseAccountFragment {
+public class LoginFragment extends BaseFragment {
     @InjectView(R.id.id_et_login_email)
     public EditText emailField;
     @InjectView(R.id.id_et_login_password)
     public EditText passwordField;
     @InjectView(R.id.id_btn_login_sign)
     public Button loginButton;
-
+    @InjectView(R.id.id_btn_login_register)
+    public Button registerButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -14,6 +14,8 @@ import pl.scribeapp.settings.account.activity.AccountActivity;
 import pl.scribeapp.settings.account.async.LoginAsyncTask;
 import pl.scribeapp.settings.account.state.LoggedInState;
 import pl.scribeapp.settings.account.state.LoggingState;
+import pl.scribeapp.settings.registration.activity.RegistrationActivity;
+import pl.scribeapp.settings.registration.state.RegisteringState;
 import pl.scribeapp.utils.SessionLoader;
 
 /**
@@ -28,11 +30,13 @@ import pl.scribeapp.utils.SessionLoader;
         },
         injects = {
                 AccountActivity.class,
+                RegistrationActivity.class,
                 LoginAsyncTask.class,
                 HandwritingInputMethod.class,
                 KeyboardInputMethod.class,
                 LoggingState.class,
                 LoggedInState.class,
+                RegisteringState.class,
                 SessionLoader.class,
                 RemoteClassifier.class,
                 ScribeInputService.class

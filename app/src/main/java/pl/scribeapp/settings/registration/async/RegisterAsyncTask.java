@@ -1,4 +1,4 @@
-package pl.scribeapp.settings.account.async;
+package pl.scribeapp.settings.registration.async;
 
 import android.os.AsyncTask;
 
@@ -7,17 +7,22 @@ import javax.security.auth.login.LoginException;
 import pl.scribeapp.connection.ServiceConnector;
 import pl.scribeapp.connection.Session;
 import pl.scribeapp.connection.utils.ConnectionListener;
+import pl.scribeapp.settings.registration.state.RegisteringState;
 
-public class LoginAsyncTask extends AsyncTask<Void, Void, Session> {
+/**
+ * Created by piotrekd on 10/02/14.
+ */
+public class RegisterAsyncTask extends AsyncTask<Void, Void, Session> {
     private String username;
     private String password;
     private ConnectionListener connectionListener;
 
     ServiceConnector serviceConnector;
 
-    public LoginAsyncTask(ServiceConnector connector, String username, String password, ConnectionListener connectionListener) {
+    public RegisterAsyncTask(ServiceConnector serviceConnector, String username, String password, ConnectionListener connectionListener) {
         super();
-        serviceConnector = connector;
+
+        this.serviceConnector = serviceConnector;
         this.username = username;
         this.password = password;
         this.connectionListener = connectionListener;
@@ -26,8 +31,8 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Session> {
     @Override
     protected Session doInBackground(Void... params) {
         try {
-            return serviceConnector.login(username, password);
-        } catch (LoginException e) {
+            return serviceConnector.register(username, password);
+        } catch (Exception e) {
             return null;
         }
     }
@@ -39,7 +44,8 @@ public class LoginAsyncTask extends AsyncTask<Void, Void, Session> {
             connectionListener.onOK(session);
         }
         else {
-            connectionListener.onError("");
+            connectionListener.onError("Unable to register");
         }
     }
+
 }

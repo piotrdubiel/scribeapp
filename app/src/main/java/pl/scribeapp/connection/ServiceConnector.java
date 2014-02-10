@@ -14,5 +14,6 @@ import pl.scribeapp.connection.exceptions.RecognitionException;
  */
 public interface ServiceConnector {
     public Session login(String username, String password) throws LoginException;
+    public Session register(String username, String password) throws Exception;
     public ClassificationResult recognize(ClassificationRequest request) throws RecognitionException;
 }

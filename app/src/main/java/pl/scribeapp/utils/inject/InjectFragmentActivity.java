@@ -33,9 +33,9 @@ public abstract class InjectFragmentActivity<F extends Fragment> extends Fragmen
     public void changeFragment(F newFragment) {
         currentFragment = newFragment;
         // TODO
-        //if (visible) {
+        if (visible) {
             setCurrentFragment();
-        //}
+        }
     }
 
     @Override

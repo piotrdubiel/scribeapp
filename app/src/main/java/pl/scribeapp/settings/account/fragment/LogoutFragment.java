@@ -10,11 +10,12 @@ import android.widget.TextView;
 
 import butterknife.InjectView;
 import pl.scribeapp.R;
+import pl.scribeapp.utils.fragment.BaseFragment;
 
 /**
  * Created by piotrekd on 1/5/14.
  */
-public class LogoutFragment extends BaseAccountFragment {
+public class LogoutFragment extends BaseFragment {
     @InjectView(R.id.id_btn_logout)
     public Button logoutButton;
     @InjectView(R.id.id_tv_logout_username)

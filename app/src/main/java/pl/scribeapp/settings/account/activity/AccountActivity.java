@@ -8,15 +8,15 @@ import javax.inject.Inject;
 
 import pl.scribeapp.R;
 import pl.scribeapp.app.Navigator;
-import pl.scribeapp.settings.account.fragment.BaseAccountFragment;
 import pl.scribeapp.settings.account.state.IdleState;
 import pl.scribeapp.settings.account.state.LoggedInState;
 import pl.scribeapp.settings.account.state.generic.AccountActivityState;
 import pl.scribeapp.utils.U;
+import pl.scribeapp.utils.fragment.BaseFragment;
 import pl.scribeapp.utils.inject.InjectFragmentActivity;
 import pl.scribeapp.utils.state.StateChanger;
 
-public class AccountActivity extends InjectFragmentActivity<BaseAccountFragment> {
+public class AccountActivity extends InjectFragmentActivity<BaseFragment> {
 
     @Inject
     Navigator navigator;

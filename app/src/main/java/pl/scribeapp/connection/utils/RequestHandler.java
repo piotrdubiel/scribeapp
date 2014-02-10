@@ -51,15 +51,21 @@ public class RequestHandler {
         }
 
         HttpPost httpPost = new HttpPost(uri);
-        for (Entry<String, String> header : headers.entrySet()) {
-            httpPost.setHeader(header.getKey(), header.getValue());
+        if (headers != null) {
+            for (Entry<String, String> header : headers.entrySet()) {
+                httpPost.setHeader(header.getKey(), header.getValue());
+            }
         }
 
         return sendJSON(httpPost, json);
     }
 
     public static HttpResponse request(String uri, HashMap<String, String> data, String token) throws IOException {
-        return request(uri, data, token);
+        return request(uri, data, token, null);
+    }
+
+    public static HttpResponse request(String uri, HashMap<String, String> data) throws IOException {
+        return request(uri, data, null, null);
     }
 
     public static HttpResponse request(String uri, byte[] data, String token) throws IOException {
