@@ -14,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.scribeapp.R;
-import pl.scribeapp.input.ScribeInputService;
+import pl.scribeapp.input.MainInputService;
 
 public class SuggestionView extends View {
 
     private static final int OUT_OF_BOUNDS = -1;
 
-    private ScribeInputService service;
+    private MainInputService service;
     private List<String> mSuggestions;
     private int selectedIndex;
     private int mTouchX = OUT_OF_BOUNDS;
@@ -102,7 +102,7 @@ public class SuggestionView extends View {
         setVerticalScrollBarEnabled(false);
     }
     
-    public void setService(ScribeInputService listener) {
+    public void setService(MainInputService listener) {
         service = listener;
     }
     

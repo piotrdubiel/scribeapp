@@ -48,7 +48,7 @@ public class LibraryActivity extends ListActivity {
 
     private static final int REQUEST_NEW_GESTURE = 1;
     
-    private static final String TAG = "ScribeInputService Settings";
+    private static final String TAG = "MainInputService Settings";
     
     // Type: long (id)
     private static final String GESTURES_INFO_ID = "gestures.info_id";

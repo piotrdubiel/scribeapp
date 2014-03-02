@@ -22,7 +22,6 @@ public class ClassificationHandler {
 
     @Inject
     public ClassificationHandler() {
-        int x = 4;
     }
 
     public String classify(Gesture gesture) {
@@ -32,5 +31,7 @@ public class ClassificationHandler {
             Log.e("HANDLER", e.getMessage());
             return "None";
         }
+
+
     }
 }

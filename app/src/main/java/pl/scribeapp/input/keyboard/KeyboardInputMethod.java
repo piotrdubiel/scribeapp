@@ -4,9 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import pl.scribeapp.R;
-import pl.scribeapp.input.InputMethodController;
-import pl.scribeapp.input.ScribeInputService;
-import pl.scribeapp.input.keyboard.StandardKeyboard;
+import pl.scribeapp.input.BaseInputMethod;
+import pl.scribeapp.input.MainInputService;
+
+import android.content.Context;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.Keyboard.Key;
 import android.inputmethodservice.KeyboardView;
@@ -15,7 +16,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
-public class KeyboardInputMethod extends InputMethodController implements
+public class KeyboardInputMethod extends BaseInputMethod implements
 		KeyboardView.OnKeyboardActionListener {
 	private static final String TAG = "KeyboardInputMethod";
 	KeyboardView keyboard_view;
@@ -40,19 +41,18 @@ public class KeyboardInputMethod extends InputMethodController implements
 
 	/**
 	 * Konstruktor inicjuje elementy widoku i ładuje klawiatury (znakową, symboli i symboli z wciśniętym klawiszem Shift).
-	 * Wymaga podania klasy ScribeInputService, z którą będzie powiązany.
+	 * Wymaga podania klasy MainInputService, z którą będzie powiązany.
 	 * @param s
 	 */
     @Inject
-    public KeyboardInputMethod() {
-		super();
+    public KeyboardInputMethod(Context context) {
+        super(context, R.layout.standard_keyboard);
+        word_separators = context.getResources().getString(R.string.word_separators);
     }
 
     @Override
-    public void initWithService(ScribeInputService service, int viewId) {
-        super.initWithService(service, viewId);
-        word_separators = inputView.getResources().getString(R.string.word_separators);
-
+    public void onCreateView() {
+        super.onCreateView();
         keyboard_view = (KeyboardView) inputView.findViewById(R.id.keyboard);
 
         alpha_keyboard = new StandardKeyboard(service, R.xml.qwerty_keyboard);
@@ -65,7 +65,7 @@ public class KeyboardInputMethod extends InputMethodController implements
 
     /**
 	 * Resetuje stan klawisza Shift.
-	 * @see pl.scribeapp.input.InputMethodController#resetModifiers()
+	 * @see pl.scribeapp.input.BaseInputMethod#resetModifiers()
 	 */
 	@Override
 	public void resetModifiers() {
@@ -85,7 +85,12 @@ public class KeyboardInputMethod extends InputMethodController implements
 		}
 	}
 
-	/**
+    @Override
+    public void enterWord(CharSequence word) {
+        service.enterWord(word);
+    }
+
+    /**
 	 * Obsługuje zdarzenie naciśnięcia na przycisk. 
 	 * Inne, możliwe klawisze w zmiennej keyCodes nie są brane pod uwagę
 	 * @see android.inputmethodservice.KeyboardView.OnKeyboardActionListener#onKey(int, int[])

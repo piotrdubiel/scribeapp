@@ -1,14 +1,11 @@
 package pl.scribeapp.classifier;
 
-import android.content.Context;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import pl.scribeapp.classifier.meta.MetaClassifier;
 import pl.scribeapp.classifier.remote.RemoteClassifier;
-import pl.scribeapp.input.handwriting.HandwritingInputMethod;
 
 /**
  * Created by piotrekd on 12/29/13.

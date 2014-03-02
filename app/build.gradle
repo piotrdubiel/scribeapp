@@ -3,6 +3,7 @@ import org.apache.tools.ant.taskdefs.condition.Os
 buildscript {
     repositories {
         mavenCentral()
+        mavenLocal()
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
     }
     dependencies {
@@ -17,38 +18,39 @@ apply plugin: 'android-test'
 apply plugin: 'hugo'
 
 repositories {
+    dependencies {
+        compile 'com.android.support:support-v4:19.0.+'
+
+        compile 'com.android.support:support-v4:18.0.0'
+        compile 'com.android.support:appcompat-v7:19.0.0'
+        compile 'com.squareup.dagger:dagger:1.2.0'
+        provided 'com.squareup.dagger:dagger-compiler:1.2.0'
+
+        compile 'com.jakewharton:butterknife:4.0.1'
+        compile 'com.squareup.okhttp:okhttp:1.3.0'
+
+        def nativeLibs = new File("$buildDir/native-libs")
+        if (!nativeLibs.exists()) {
+            nativeLibs.mkdirs()
+        }
+        new File("$nativeLibs/native-libs.jar").createNewFile()
+
+        compile files('libs/native-libs.jar')
+
+
+        instrumentTestCompile 'org.robolectric:robolectric:2.1.+'
+        instrumentTestCompile 'com.squareup:fest-android:1.0.+'
+        instrumentTestCompile 'org.mockito:mockito-all:1.9.+'
+        instrumentTestCompile 'junit:junit:4.+'
+
+        testCompile 'org.robolectric:robolectric:2.1.+'
+        testCompile 'com.squareup:fest-android:1.0.+'
+        testCompile 'org.mockito:mockito-all:1.9.+'
+        testCompile 'junit:junit:4.+'
+    }
     mavenCentral()
 }
 
-dependencies {
-    compile 'com.android.support:support-v4:19.0.+'
-
-    compile 'com.android.support:support-v4:18.0.0'
-    compile 'com.android.support:appcompat-v7:19.0.0'
-    compile 'com.squareup.dagger:dagger:1.2.0'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.0'
-
-    compile 'com.jakewharton:butterknife:4.0.1'
-    compile 'com.squareup.okhttp:okhttp:1.3.0'
-
-    def nativeLibs = new File("$buildDir/native-libs")
-    if (!nativeLibs.exists()) {
-        nativeLibs.mkdirs()
-    }
-    new File("$nativeLibs/native-libs.jar").createNewFile()
-
-    compile files('libs/native-libs.jar')
-
-    testCompile 'junit:junit:4.10'
-    testCompile 'org.robolectric:robolectric:2.1.+'
-    testCompile 'com.squareup:fest-android:1.0.+'
-    testCompile 'org.mockito:mockito-all:1.9.+'
-
-    instrumentTestCompile 'junit:junit:4.10'
-    instrumentTestCompile 'org.robolectric:robolectric:2.1.+'
-    instrumentTestCompile 'com.squareup:fest-android:1.0.+'
-    instrumentTestCompile 'org.mockito:mockito-all:1.9.+'
-}
 
 android {
     compileSdkVersion 19
@@ -57,23 +59,28 @@ android {
     defaultConfig {
         minSdkVersion 10
         targetSdkVersion 19
+        testInstrumentationRunner "android.test.InstrumentationTestRunner"
     }
 
-    sourceSets {
-        instrumentTest.setRoot('src/test')
-    }
 
     buildTypes {
         debug {
             debuggable true
         }
     }
-    lintOptions {
-        abortOnError false
-    }
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+//    sourceSets {
+//        instrumentTest.setRoot('src/test')
+//    }
+
+    testBuildType "debug"
+
+    lintOptions {
+        abortOnError false
     }
 
     compileOptions {
@@ -114,4 +121,46 @@ tasks.withType(JavaCompile) { compileTask -> compileTask.dependsOn copyNative }
 
 tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
     pkgTask.jniFolders = [new File(buildDir, 'native-libs')]
+}
+
+task addTest() {
+    def src = ['src/test', 'src/instrumentTest']
+    def  file = file("app.iml")
+
+    doLast {
+        def parsedXml = (new XmlParser()).parse(file)
+        def node = parsedXml.component[1].content[0]
+        src.each {
+            def path = 'file://$MODULE_DIR$/'+"${it}"
+            def set =  node.find { it.@url == path}
+            if( set == null) {
+                new Node(node, 'sourceFolder', [ 'url' :'file://$MODULE_DIR$/'+"${it}", 'isTestSource':"true"])
+                def writer = new StringWriter()
+                new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
+                file.text = writer.toString()
+            }
+        }
+    }
+}
+
+task ensureDependencyOrder() {
+    def projectFile = file("app.iml")
+    doLast {
+        def parsedXml = (new XmlParser()).parse(projectFile)
+        def node = parsedXml.component[1].content[0]
+        src.each {
+            def path = 'file://$MODULE_DIR$/'+"${it}"
+            def set =  node.find { it.@url == path}
+            if( set == null) {
+                new Node(node, 'sourceFolder', [ 'url' :'file://$MODULE_DIR$/'+"${it}", 'isTestSource':"true"])
+                def writer = new StringWriter()
+                new XmlNodePrinter(new PrintWriter(writer)).print(parsedXml)
+                projectFile.text = writer.toString()
+            }
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    preBuild.dependsOn(addTest)
 }

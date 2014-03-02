@@ -7,27 +7,24 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.Robolectric;
-import org.robolectric.shadows.ShadowContext;
 import org.robolectric.shadows.ShadowEnvironment;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 import javax.inject.Inject;
 
 import pl.scribeapp.connection.Session;
 import pl.scribeapp.test.RobolectricGradleTestRunner;
 
-import static junit.framework.Assert.*;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static pl.scribeapp.test.TestInject.injectMocks;
 
@@ -54,12 +51,12 @@ public class SessionLoaderTest {
         assertNotNull(sessionLoader.context);
     }
 
-    @Test
-    public void shouldReturnNullForNoFile() throws IOException {
-        when(sessionLoader.context.openFileInput(Config.SESSION_FILENAME))
-                .thenThrow(FileNotFoundException.class);
-        assertNull(sessionLoader.load());
-    }
+//    @Test
+//    public void shouldReturnNullForNoFile() throws IOException {
+//        when(sessionLoader.context.openFileInput(Config.SESSION_FILENAME))
+//                .thenThrow(FileNotFoundException.class);
+//        assertNull(sessionLoader.load());
+//    }
 
     @Test
     public void shouldLoadSession() throws IOException {
@@ -80,7 +77,6 @@ public class SessionLoaderTest {
 
         File file = new File(ShadowEnvironment.getExternalStorageDirectory(), Config.SESSION_FILENAME);
         assertTrue(file.exists());
-
     }
 
     private File prepareFile(String[] lines) throws IOException {

@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 
-import javax.inject.Inject;
-
 import pl.scribeapp.app.ScribeApplication;
 import pl.scribeapp.test.RobolectricGradleTestRunner;
 

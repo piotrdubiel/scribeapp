@@ -10,7 +10,7 @@ import pl.scribeapp.app.ScribeApplication;
 /**
  * Created by piotrekd on 12/29/13.
  */
-public abstract class InjectInputMethodService extends InputMethodService {
+public abstract class RegistrableInputMethodService extends InputMethodService {
     private ObjectGraph objectGraph;
 
     @Override
@@ -18,6 +18,7 @@ public abstract class InjectInputMethodService extends InputMethodService {
         super.onCreate();
         ScribeApplication application = (ScribeApplication) getApplication();
         objectGraph = application.getObjectGraph().plus(getModules().toArray());
+        application.registerInputMethodService(this);
         objectGraph.inject(this);
     }
 

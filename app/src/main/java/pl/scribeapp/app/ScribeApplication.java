@@ -2,14 +2,12 @@ package pl.scribeapp.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.inputmethodservice.InputMethodService;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import dagger.ObjectGraph;
-import pl.scribeapp.connection.ConnectionModule;
 import pl.scribeapp.connection.Session;
 import pl.scribeapp.utils.SessionLoader;
 
@@ -21,6 +19,7 @@ public class ScribeApplication extends Application implements Navigator {
     private Session session;
 
     private SessionLoader sessionLoader;
+    private InputMethodService currentInputMethodService;
 
     public static ScribeApplication from(Context context) {
         return (ScribeApplication) context.getApplicationContext();
@@ -61,9 +60,18 @@ public class ScribeApplication extends Application implements Navigator {
     }
 
     protected List<Object> getModules() {
-        List<Object> modules = new ArrayList<Object>();
-        modules.add(new ScribeModule(this));
+        List<Object> modules = new ArrayList<>();
+        modules.add(new ApplicationModule(this));
         return modules;
+    }
+
+    public InputMethodService getInputMethodService() {
+        return currentInputMethodService;
+    }
+
+    public void registerInputMethodService(InputMethodService ims) {
+        this.currentInputMethodService = ims;
+
     }
 }
 

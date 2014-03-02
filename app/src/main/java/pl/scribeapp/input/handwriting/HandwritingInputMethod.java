@@ -2,12 +2,14 @@ package pl.scribeapp.input.handwriting;
 
 import butterknife.InjectView;
 import pl.scribeapp.R;
+import pl.scribeapp.app.ScribeApplication;
 import pl.scribeapp.classifier.ClassificationHandler;
 import pl.scribeapp.classifier.Classifier;
-import pl.scribeapp.input.InputMethodController;
-import pl.scribeapp.input.ScribeInputService;
+import pl.scribeapp.input.BaseInputMethod;
+import pl.scribeapp.input.MainInputService;
 import pl.scribeapp.settings.SettingsActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.gesture.GestureOverlayView;
@@ -25,8 +27,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
-public class HandwritingInputMethod extends InputMethodController implements OnClickListener,
-        OnLongClickListener {
+public class HandwritingInputMethod extends BaseInputMethod implements OnClickListener, OnLongClickListener {
     private static final String TAG = "GestureInput";
 
     @InjectView(R.id.deleteKey)
@@ -45,20 +46,30 @@ public class HandwritingInputMethod extends InputMethodController implements OnC
     private int[] modes = {Classifier.CAPITAL_ALPHA, Classifier.SMALL_ALPHA, Classifier.DIGIT};
 
     int gestureInterval;
-    boolean capsLock = false;
+    boolean capsLock = false;{}
 
     @Inject
     public ClassificationHandler classificationHandler;
 
-    public HandwritingInputMethod() {
-        super();
+    @Inject
+    public HandwritingInputMethod(Context context) {
+        super(context, R.layout.gesture_input_view);
         current_mode = 0;
+
+        word_separators = context.getResources().getString(R.string.word_separators);
+        input_modes = context.getResources().getStringArray(R.array.input_modes);
+
+        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
+
+
+        Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
     }
 
     @Override
-    public void initWithService(ScribeInputService service, int viewId) {
-        super.initWithService(service, viewId);
-
+    public void onCreateView() {
+        super.onCreateView();
         enterKey = (ImageButton) inputView.findViewById(R.id.enterKey);
         spaceKey = (ImageButton) inputView.findViewById(R.id.spaceKey);
         supportSymbolKeyboardView = (KeyboardView) inputView.findViewById(R.id.support_keyboard);
@@ -75,22 +86,10 @@ public class HandwritingInputMethod extends InputMethodController implements OnC
         gestureView.addOnGestureListener(new WordRecognizer(this));
         gestureView.setGestureStrokeLengthThreshold(0.0f);
         gestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
+        gestureView.setFadeOffset(gestureInterval);
 
         supportSymbolKeyboardView.setOnKeyboardActionListener(new SymbolProcessor());
         supportSymbolKeyboardView.setKeyboard(new Keyboard(service, R.xml.symbols));
-
-        word_separators = inputView.getResources().getString(R.string.word_separators);
-        input_modes = inputView.getResources().getStringArray(R.array.input_modes);
-
-        // currentType = Classifier.ALPHA;
-
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(service);
-
-        gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
-        gestureView.setFadeOffset(gestureInterval);
-
-
-        Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
     }
 
     /**
@@ -181,5 +180,10 @@ public class HandwritingInputMethod extends InputMethodController implements OnC
 
     @Override
     public void resetModifiers() {
+    }
+
+    @Override
+    public void enterWord(CharSequence word) {
+        service.enterWord(word);
     }
 }

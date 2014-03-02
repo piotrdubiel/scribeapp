@@ -25,8 +25,21 @@ public class RobolectricGradleTestRunner extends RobolectricTestRunner {
             String assetsProperty = System.getProperty("android.assets");
             return new AndroidManifest(Fs.fileFromPath(manifestProperty), Fs.fileFromPath(resProperty),
                     Fs.fileFromPath(assetsProperty));
+        } else {
+            String path = RobolectricGradleTestRunner.class.getProtectionDomain()
+                    .getCodeSource()
+                    .getLocation()
+                    .getPath();
+            String manifestPath = path + "../../manifests/debug/AndroidManifest.xml";
+            String resPath = path + "";
+            String assetPath = path + "";
+            if (Fs.fileFromPath(manifestPath).exists()) {
+                return new AndroidManifest(Fs.fileFromPath(manifestPath), Fs.fileFromPath(resPath), Fs.fileFromPath(assetPath));
+            }
+            else {
+                return super.getAppManifest(config);
+            }
         }
-        return super.getAppManifest(config);
     }
 
     public static void startFragment(Fragment fragment) {

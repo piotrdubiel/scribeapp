@@ -1,8 +1,5 @@
 package pl.scribeapp.classifier.ann;
 
-import android.app.Activity;
-import android.content.Context;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

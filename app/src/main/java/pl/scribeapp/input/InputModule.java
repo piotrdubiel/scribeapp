@@ -1,11 +1,10 @@
 package pl.scribeapp.input;
 
-import javax.inject.Singleton;
+import android.inputmethodservice.InputMethodService;
 
 import dagger.Module;
 import dagger.Provides;
-import pl.scribeapp.input.handwriting.HandwritingInputMethod;
-import pl.scribeapp.input.keyboard.KeyboardInputMethod;
+import pl.scribeapp.app.ScribeApplication;
 
 /**
  * Created by piotrekd on 12/29/13.
@@ -15,13 +14,8 @@ import pl.scribeapp.input.keyboard.KeyboardInputMethod;
         complete = false
 )
 public class InputModule {
-    @Provides @Singleton
-    HandwritingInputMethod provideHandwritingInputMethod() {
-        return new HandwritingInputMethod();
+    @Provides
+    InputMethodService provideInputMethodService(ScribeApplication application) {
+        return application.getInputMethodService();
     }
-
-//    @Provides @Singleton
-//    KeyboardInputMethod provideKeyboardInputMethod() {
-//        return new KeyboardInputMethod();
-//    }
 }

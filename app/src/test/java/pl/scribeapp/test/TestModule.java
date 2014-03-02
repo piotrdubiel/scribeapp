@@ -1,21 +1,22 @@
 package pl.scribeapp.test;
 
 import android.content.Context;
-
-import javax.inject.Singleton;
-
+import android.inputmethodservice.InputMethodService;
 import dagger.Module;
 import dagger.Provides;
+import org.robolectric.Robolectric;
+import pl.scribeapp.app.ApplicationModule;
 import pl.scribeapp.app.Navigator;
-import pl.scribeapp.app.ScribeModule;
+import pl.scribeapp.app.ScribeApplication;
 import pl.scribeapp.classifier.ann.NetworkTest;
-import pl.scribeapp.classifier.remote.RemoteClassifier;
 import pl.scribeapp.classifier.remote.RemoteClassifierTest;
 import pl.scribeapp.connection.ServiceConnector;
-import pl.scribeapp.input.ScribeInputServiceTest;
+import pl.scribeapp.input.MainInputService;
 import pl.scribeapp.input.handwriting.HandwritingInputMethodTest;
 import pl.scribeapp.settings.account.state.LoggingStateTest;
 import pl.scribeapp.utils.SessionLoaderTest;
+
+import javax.inject.Singleton;
 
 import static org.mockito.Mockito.mock;
 
@@ -25,10 +26,10 @@ import static org.mockito.Mockito.mock;
                 RemoteClassifierTest.class,
                 NetworkTest.class,
                 HandwritingInputMethodTest.class,
-                ScribeInputServiceTest.class,
                 SessionLoaderTest.class,
+                MainInputService.class
         },
-        includes = ScribeModule.class,
+        includes = ApplicationModule.class,
         overrides = true,
         library = true
 )
@@ -40,12 +41,22 @@ public class TestModule {
     }
 
     @Provides
-    Context provideContext() {
+    Context provideMockContext() {
         return mock(Context.class);
     }
 
     @Provides
-    Navigator provideNavigator() {
+    Navigator provideMockNavigator() {
         return mock(Navigator.class);
+    }
+
+    @Provides
+    ScribeApplication provideTestApplication() {
+        return (ScribeApplication) Robolectric.application;
+    }
+
+    @Provides
+    InputMethodService provideMockInputMethodService() {
+        return mock(MainInputService.class);
     }
 }

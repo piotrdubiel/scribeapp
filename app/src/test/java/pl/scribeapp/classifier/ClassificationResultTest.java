@@ -10,13 +10,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 
-import pl.scribeapp.classifier.Classifier;
 import pl.scribeapp.classifier.artifacts.LabelClassificationResult;
 import pl.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
 import pl.scribeapp.classifier.utils.Utils;
 import pl.scribeapp.test.RobolectricGradleTestRunner;
-
-import static pl.scribeapp.test.TestInject.injectMocks;
 
 @RunWith(RobolectricGradleTestRunner.class)
 public class ClassificationResultTest {
@@ -27,7 +24,7 @@ public class ClassificationResultTest {
     }
 
 	@Test
-	public void testLabelComparator() {
+	public void shouldCompareLabels() {
 		// given
 		ArrayList<Label> list = new ArrayList<Label>();
 		list.add(new Label('a', 0.1f));
@@ -49,7 +46,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testCharacterComparator() {
+	public void shouldCompareCharacters() {
 		// given
 		ArrayList<Label> list = new ArrayList<Label>();
 		list.add(new Label('a', 0.1f));
@@ -71,7 +68,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testGetLabels() {
+	public void shouldGetLabels() {
 		// given
 		float[] in = { 0.001f, 0.01f, 0.02f, 0.03f, 0.04f, 0.05f, 0.06f, 0.07f, 0.08f, 0.09f };
 
@@ -94,7 +91,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testGetLabelsWithBelief() {
+	public void shouldGetLabelsWithBelief() {
 		// given
 		float[] in = { 0.001f, 0.01f, 0.02f, 0.03f, 0.04f, 0.05f, 0.06f, 0.07f, 0.08f, 0.09f };
 
@@ -135,7 +132,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testCombineSameType() throws Exception {
+	public void shouldCombineSameType() throws Exception {
 		// given
 		float[] a = { 0.0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.05f, 0.06f, 0.07f, 0.08f, 0.09f };
 		float[] b = { 1.0f, 0.1f, 0.2f, 0.3f, 0.4f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f };
@@ -183,7 +180,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testCombineDifferentType() throws Exception {
+	public void shouldCombineDifferentType() throws Exception {
 		// given
 		float[] a = new float[35];
 		for (int i = 0; i < a.length; ++i)
@@ -212,7 +209,7 @@ public class ClassificationResultTest {
 	}
 
 	@Test
-	public void testPairsWith() {
+	public void shouldPairsWith() {
 		// given
 		float[] a = { 0.0f, 0.3f, 0.0f, 0.0f, 0.04f, 0.05f, 0.06f, 0.07f, 0.08f, 0.09f };
 		float[] b = { 0.0f, 0.1f, 0.0f, 0.5f, 0.7f, 0.3f, 0.6f, 0.7f, 0.8f, 0.9f };

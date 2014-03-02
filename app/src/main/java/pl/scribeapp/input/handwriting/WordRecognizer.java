@@ -6,10 +6,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import javax.inject.Inject;
-
-import pl.scribeapp.classifier.ClassificationHandler;
-
 /**
  * Created by piotrek on 27.11.13.
  */
@@ -74,7 +70,7 @@ public class WordRecognizer implements GestureOverlayView.OnGestureListener {
         public void run() {
             Log.d(TAG, "Commit text");
             synchronized (recognition_lock) {
-                inputMethod.service.enterWord(current_result);
+                inputMethod.enterWord(current_result);
                 current_result = null;
                 current_task = null;
                 inputMethod.gestureView.clear(false);
