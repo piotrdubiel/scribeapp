@@ -17,7 +17,7 @@ public class TrigramDbHelper extends SQLiteOpenHelper {
 	public static final String COLUMN_FREQUENCY = "frequency";
 	public static String[] ALL_COLUMNS = { COLUMN_GRAM, COLUMN_FREQUENCY };
 
-	private final static String DATABASE_PATH = "/data/data/pl.scribeapp/databases/";
+	private final static String DATABASE_PATH = "/data/data/io.scribeapp/databases/";
 
 	private static final String DATABASE_NAME = "trigrams.db";
 	private static final int DATABASE_VERSION = 1;

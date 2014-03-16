@@ -12,6 +12,7 @@ import io.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
 import io.scribeapp.classifier.gesture.GestureLibraryClassifier;
 import io.scribeapp.classifier.utils.PCA;
 import io.scribeapp.classifier.utils.Utils;
+import io.scribeapp.utils.inject.ForContext;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -31,11 +32,9 @@ public class MetaClassifier implements Classifier {
 	private GestureLibraryClassifier capital_library;
 	private GestureLibraryClassifier number_library;
 	private PCA pca;
-	@Inject
-    Context context;
 
     @Inject
-	public MetaClassifier() {
+	public MetaClassifier(Context context) {
 		try {
 			pca = new PCA(context);
 

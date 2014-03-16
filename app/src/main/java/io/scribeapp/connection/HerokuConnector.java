@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.security.auth.login.LoginException;
 
 import io.scribeapp.app.Navigator;
@@ -20,6 +21,7 @@ import io.scribeapp.connection.utils.RequestHandler;
 /**
  * Created by piotrekd on 11/25/13.
  */
+@Singleton
 public class HerokuConnector implements ServiceConnector {
     private String URI = "http://scribe-server.herokuapp.com/api/";
     @Inject

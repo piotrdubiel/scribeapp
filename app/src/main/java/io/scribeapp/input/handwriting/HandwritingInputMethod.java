@@ -1,12 +1,5 @@
 package io.scribeapp.input.handwriting;
 
-import butterknife.InjectView;
-import io.scribeapp.R;
-import io.scribeapp.classifier.ClassificationHandler;
-import io.scribeapp.classifier.Classifier;
-import io.scribeapp.input.BaseInputMethod;
-import io.scribeapp.settings.SettingsActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -25,8 +18,19 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import butterknife.InjectView;
+import io.scribeapp.R;
+import io.scribeapp.classifier.ClassificationHandler;
+import io.scribeapp.classifier.Classifier;
+import io.scribeapp.input.BaseInputMethod;
+import io.scribeapp.input.handwriting.state.IdleState;
+import io.scribeapp.input.handwriting.state.RecognitionState;
+import io.scribeapp.settings.SettingsActivity;
+import io.scribeapp.utils.state.StateChanger;
+
 public class HandwritingInputMethod extends BaseInputMethod implements OnClickListener, OnLongClickListener {
     private static final String TAG = "GestureInput";
+    final StateChanger<RecognitionState> stateChanger;
 
     @InjectView(R.id.deleteKey)
     ImageButton deleteKey;
@@ -44,7 +48,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
     private int[] modes = {Classifier.CAPITAL_ALPHA, Classifier.SMALL_ALPHA, Classifier.DIGIT};
 
     int gestureInterval;
-    boolean capsLock = false;{}
+    boolean capsLock = false;
 
     @Inject
     public ClassificationHandler classificationHandler;
@@ -56,13 +60,11 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
 
         word_separators = context.getResources().getString(R.string.word_separators);
         input_modes = context.getResources().getStringArray(R.array.input_modes);
-
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
-
         gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
-
-
         Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
+        stateChanger = new StateChanger<RecognitionState>(service);
+        stateChanger.setState(new IdleState());
     }
 
     @Override

@@ -15,7 +15,7 @@ import io.scribeapp.app.ScribeApplication;
 )
 public class InputModule {
     @Provides
-    InputMethodService provideInputMethodService(ScribeApplication application) {
+    MainInputService provideInputMethodService(ScribeApplication application) {
         return application.getInputMethodService();
     }
 }

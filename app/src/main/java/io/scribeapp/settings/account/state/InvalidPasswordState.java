@@ -1,9 +1,9 @@
 package io.scribeapp.settings.account.state;
 
 import io.scribeapp.settings.account.activity.AccountActivity;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
+import io.scribeapp.settings.account.state.generic.AccountState;
 
-public class InvalidPasswordState extends AccountActivityState {
+public class InvalidPasswordState extends AccountState {
     private String messageKey;
 
     public InvalidPasswordState(String messageKey) {

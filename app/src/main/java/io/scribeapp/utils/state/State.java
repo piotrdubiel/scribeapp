@@ -3,7 +3,7 @@ package io.scribeapp.utils.state;
 /**
  * Created by piotrekd on 12/30/13.
  */
-public class ActivityState<CONTEXT> {
+public class State<CONTEXT> {
     protected CONTEXT stateContext;
 
     public void onStateEnter(CONTEXT context) {

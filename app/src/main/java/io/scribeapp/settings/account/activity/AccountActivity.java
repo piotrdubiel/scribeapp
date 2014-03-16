@@ -10,7 +10,7 @@ import io.scribeapp.R;
 import io.scribeapp.app.Navigator;
 import io.scribeapp.settings.account.state.IdleState;
 import io.scribeapp.settings.account.state.LoggedInState;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
+import io.scribeapp.settings.account.state.generic.AccountState;
 import io.scribeapp.utils.U;
 import io.scribeapp.utils.fragment.BaseFragment;
 import io.scribeapp.utils.inject.InjectFragmentActivity;
@@ -21,7 +21,7 @@ public class AccountActivity extends InjectFragmentActivity<BaseFragment> {
     @Inject
     Navigator navigator;
 
-    private StateChanger<AccountActivityState> stateChanger;
+    private StateChanger<AccountState> stateChanger;
 
     @Inject
     public AccountActivity() {
@@ -32,7 +32,7 @@ public class AccountActivity extends InjectFragmentActivity<BaseFragment> {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.activity_login);
         container_id = R.id.id_login_fragment_container;
-        stateChanger = new StateChanger<AccountActivityState>(this);
+        stateChanger = new StateChanger<AccountState>(this);
         if (navigator.getSession() == null) {
             setState(new IdleState());
         }
@@ -46,7 +46,7 @@ public class AccountActivity extends InjectFragmentActivity<BaseFragment> {
         return U.NO_MODULES;
     }
 
-    public void setState(AccountActivityState state) {
+    public void setState(AccountState state) {
         stateChanger.setState(state);
     }
 

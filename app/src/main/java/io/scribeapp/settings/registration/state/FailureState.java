@@ -5,13 +5,13 @@ import android.view.View;
 import io.scribeapp.R;
 import io.scribeapp.settings.registration.activity.RegistrationActivity;
 import io.scribeapp.settings.registration.fragment.RegistrationFragment;
-import io.scribeapp.settings.registration.state.generic.RegistrationActivityState;
+import io.scribeapp.settings.registration.state.generic.RegistrationState;
 import io.scribeapp.utils.U;
 
 /**
  * Created by piotrekd on 09/02/14.
  */
-public class FailureState extends RegistrationActivityState implements View.OnClickListener {
+public class FailureState extends RegistrationState implements View.OnClickListener {
     private RegistrationFragment registrationFragment;
     private String reason;
 

@@ -7,12 +7,12 @@ import android.view.View;
 import io.scribeapp.R;
 import io.scribeapp.settings.account.activity.AccountActivity;
 import io.scribeapp.settings.account.fragment.LoginFragment;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
+import io.scribeapp.settings.account.state.generic.AccountState;
 import io.scribeapp.settings.registration.activity.RegistrationActivity;
 import io.scribeapp.utils.fragment.FragmentViewCreatedListener;
 
 
-public class IdleState extends AccountActivityState implements View.OnClickListener, FragmentViewCreatedListener {
+public class IdleState extends AccountState implements View.OnClickListener, FragmentViewCreatedListener {
     private LoginFragment loginFragment;
 
     @Override

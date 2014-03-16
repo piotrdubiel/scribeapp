@@ -13,12 +13,12 @@ import io.scribeapp.settings.account.state.generic.Lockable;
 import io.scribeapp.settings.registration.activity.RegistrationActivity;
 import io.scribeapp.settings.registration.async.RegisterAsyncTask;
 import io.scribeapp.settings.registration.fragment.RegistrationFragment;
-import io.scribeapp.settings.registration.state.generic.RegistrationActivityState;
+import io.scribeapp.settings.registration.state.generic.RegistrationState;
 
 /**
  * Created by piotrekd on 09/02/14.
  */
-public class RegisteringState extends RegistrationActivityState implements Lockable, ConnectionListener {
+public class RegisteringState extends RegistrationState implements Lockable, ConnectionListener {
     @Inject
     ServiceConnector serviceConnector;
 

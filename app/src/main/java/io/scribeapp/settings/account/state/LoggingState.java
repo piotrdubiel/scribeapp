@@ -9,10 +9,10 @@ import io.scribeapp.connection.utils.ConnectionListener;
 import io.scribeapp.settings.account.activity.AccountActivity;
 import io.scribeapp.settings.account.async.LoginAsyncTask;
 import io.scribeapp.settings.account.fragment.LoginFragment;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
+import io.scribeapp.settings.account.state.generic.AccountState;
 import io.scribeapp.settings.account.state.generic.Lockable;
 
-public class LoggingState extends AccountActivityState implements Lockable, ConnectionListener {
+public class LoggingState extends AccountState implements Lockable, ConnectionListener {
     @Inject
     ServiceConnector serviceConnector;
 

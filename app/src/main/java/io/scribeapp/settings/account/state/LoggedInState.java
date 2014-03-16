@@ -10,14 +10,13 @@ import io.scribeapp.app.Navigator;
 import io.scribeapp.connection.Session;
 import io.scribeapp.settings.account.activity.AccountActivity;
 import io.scribeapp.settings.account.fragment.LogoutFragment;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
-import io.scribeapp.utils.GravatarUtility;
+import io.scribeapp.settings.account.state.generic.AccountState;
 import io.scribeapp.utils.fragment.FragmentViewCreatedListener;
 
 /**
  * Created by piotrekd on 1/5/14.
  */
-public class LoggedInState extends AccountActivityState implements View.OnClickListener, FragmentViewCreatedListener {
+public class LoggedInState extends AccountState implements View.OnClickListener, FragmentViewCreatedListener {
     @Inject
     Navigator navigator;
 
@@ -48,6 +47,6 @@ public class LoggedInState extends AccountActivityState implements View.OnClickL
         logoutFragment.logoutButton.setOnClickListener(this);
         logoutFragment.logoutButton.setEnabled(true);
 
-        logoutFragment.imageView.setImageBitmap(GravatarUtility.hash(session.token));
+        //logoutFragment.imageView.setImageBitmap(GravatarUtility.hash(session.token));
     }
 }

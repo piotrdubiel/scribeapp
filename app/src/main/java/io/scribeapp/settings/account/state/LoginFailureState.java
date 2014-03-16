@@ -5,9 +5,9 @@ import android.view.View;
 import io.scribeapp.R;
 import io.scribeapp.settings.account.activity.AccountActivity;
 import io.scribeapp.settings.account.fragment.LoginFragment;
-import io.scribeapp.settings.account.state.generic.AccountActivityState;
+import io.scribeapp.settings.account.state.generic.AccountState;
 
-public class LoginFailureState extends AccountActivityState implements View.OnClickListener {
+public class LoginFailureState extends AccountState implements View.OnClickListener {
 
     private String reason;
     private LoginFragment loginFragment;

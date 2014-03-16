@@ -1,29 +1,30 @@
 package io.scribeapp.utils.state;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 /**
  * Created by piotrekd on 12/30/13.
  */
-public class StateChanger<STATE extends ActivityState> {
+public class StateChanger<STATE extends State> {
     protected STATE currentState;
     protected STATE previousState;
 
-    private Activity activity;
+    private Context context;
 
-    public StateChanger(Activity activity) {
-        this.activity = activity;
+    public StateChanger(Context context) {
+        this.context = context;
     }
 
     public void setState(STATE state) {
         Log.d("StateChanger", "Changing state from " + currentState + " to " + state);
         previousState = currentState;
         if (previousState != null) {
-            previousState.onStateLeave(activity);
+            previousState.onStateLeave(context);
         }
         currentState = state;
-        currentState.onStateEnter(activity);
+        currentState.onStateEnter(context);
     }
 
     public STATE currentState() {

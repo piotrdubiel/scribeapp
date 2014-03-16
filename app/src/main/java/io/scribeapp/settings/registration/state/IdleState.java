@@ -6,12 +6,12 @@ import android.view.View;
 import io.scribeapp.R;
 import io.scribeapp.settings.registration.activity.RegistrationActivity;
 import io.scribeapp.settings.registration.fragment.RegistrationFragment;
-import io.scribeapp.settings.registration.state.generic.RegistrationActivityState;
+import io.scribeapp.settings.registration.state.generic.RegistrationState;
 import io.scribeapp.utils.U;
 import io.scribeapp.utils.fragment.FragmentViewCreatedListener;
 
 
-public class IdleState extends RegistrationActivityState implements View.OnClickListener, FragmentViewCreatedListener {
+public class IdleState extends RegistrationState implements View.OnClickListener, FragmentViewCreatedListener {
     private RegistrationFragment registrationFragment;
 
     @Override

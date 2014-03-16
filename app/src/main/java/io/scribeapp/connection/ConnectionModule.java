@@ -15,7 +15,7 @@ import dagger.Provides;
 public class ConnectionModule {
     @Provides
     @Singleton
-    ServiceConnector provideServiceConnector() {
-        return new HerokuConnector();
+    ServiceConnector provideServiceConnector(HerokuConnector connector) {
+        return connector;
     }
 }

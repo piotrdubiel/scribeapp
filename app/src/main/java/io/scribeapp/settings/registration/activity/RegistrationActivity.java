@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import io.scribeapp.R;
 import io.scribeapp.app.Navigator;
 import io.scribeapp.settings.registration.state.IdleState;
-import io.scribeapp.settings.registration.state.generic.RegistrationActivityState;
+import io.scribeapp.settings.registration.state.generic.RegistrationState;
 import io.scribeapp.utils.U;
 import io.scribeapp.utils.fragment.BaseFragment;
 import io.scribeapp.utils.inject.InjectFragmentActivity;
@@ -20,7 +20,7 @@ public class RegistrationActivity extends InjectFragmentActivity<BaseFragment> {
     @Inject
     Navigator navigator;
 
-    private StateChanger<RegistrationActivityState> stateChanger;
+    private StateChanger<RegistrationState> stateChanger;
 
     @Inject
     public RegistrationActivity() {
@@ -31,7 +31,7 @@ public class RegistrationActivity extends InjectFragmentActivity<BaseFragment> {
         super.onCreate(savedInstanceBundle);
         setContentView(R.layout.activity_registration);
         container_id = R.id.id_registration_fragment_container;
-        stateChanger = new StateChanger<RegistrationActivityState>(this);
+        stateChanger = new StateChanger<RegistrationState>(this);
         stateChanger.setState(new IdleState());
     }
 
@@ -40,7 +40,7 @@ public class RegistrationActivity extends InjectFragmentActivity<BaseFragment> {
         return U.NO_MODULES;
     }
 
-    public void setState(RegistrationActivityState state) {
+    public void setState(RegistrationState state) {
         stateChanger.setState(state);
     }
 

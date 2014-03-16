@@ -6,6 +6,7 @@ import java.util.List;
 
 import dagger.ObjectGraph;
 import io.scribeapp.app.ScribeApplication;
+import io.scribeapp.input.MainInputService;
 
 /**
  * Created by piotrekd on 12/29/13.
@@ -18,8 +19,14 @@ public abstract class RegistrableInputMethodService extends InputMethodService {
         super.onCreate();
         ScribeApplication application = ScribeApplication.get(this);
         objectGraph = application.getObjectGraph().plus(getModules().toArray());
-        application.registerInputMethodService(this);
+        application.registerInputMethodService((MainInputService) this);
         objectGraph.inject(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ScribeApplication.get(this).unregisterInputMethodService();
     }
 
     protected abstract List<Object> getModules();

@@ -1,13 +1,15 @@
 import org.apache.tools.ant.taskdefs.condition.Os
 
+
 buildscript {
     repositories {
         mavenCentral()
-        mavenLocal()
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
     }
     dependencies {
-//        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
+        classpath 'org.robolectric.gradle:gradle-android-test-plugin:0.9.3'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.0.+'
     }
 }
@@ -25,7 +27,7 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:1.2.0'
 
     compile 'com.jakewharton:butterknife:4.0.1'
-    compile 'com.squareup.okhttp:okhttp:1.3.0'
+    //compile 'com.squareup.okhttp:okhttp:1.3.0'
 
 
     def nativeLibs = new File("$buildDir/native-libs")
@@ -38,15 +40,15 @@ dependencies {
 
     androidTestCompile 'junit:junit:3.8'
 
-//        instrumentTestCompile 'org.robolectric:robolectric:2.1.+'
-//        instrumentTestCompile 'com.squareup:fest-android:1.0.+'
-//        instrumentTestCompile 'org.mockito:mockito-all:1.9.+'
-//        instrumentTestCompile 'junit:junit:4.+'
-
-//    testCompile 'org.robolectric:robolectric:2.1.+'
-//    testCompile 'com.squareup:fest-android:1.0.+'
-//    testCompile 'org.mockito:mockito-all:1.9.+'
-//    testCompile 'junit:junit:4.+'
+//        testCompile 'org.robolectric:robolectric:2.1.+'
+//        testCompile 'com.squareup:fest-android:1.0.+'
+//        testCompile 'org.mockito:mockito-all:1.9.+'
+//        testCompile 'junit:junit:4.+'
+//
+//    androidTestCompile 'junit:junit:4.+'
+//    androidTestCompile 'org.robolectric:robolectric:2.1.+'
+//    androidTestCompile 'com.squareup:fest-android:1.0.+'
+//    androidTestCompile 'org.mockito:mockito-all:1.9.+'
 }
 
 

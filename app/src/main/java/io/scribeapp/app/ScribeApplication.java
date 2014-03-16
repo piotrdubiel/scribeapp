@@ -7,8 +7,11 @@ import android.inputmethodservice.InputMethodService;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import dagger.ObjectGraph;
 import io.scribeapp.connection.Session;
+import io.scribeapp.input.MainInputService;
 import io.scribeapp.utils.SessionLoader;
 
 /**
@@ -18,8 +21,9 @@ public class ScribeApplication extends Application implements Navigator {
     private ObjectGraph objectGraph;
     private Session session;
 
-    private SessionLoader sessionLoader;
-    private InputMethodService currentInputMethodService;
+    @Inject
+    SessionLoader sessionLoader;
+    private MainInputService currentInputMethodService;
 
     public static ScribeApplication from(Context context) {
         return (ScribeApplication) context.getApplicationContext();
@@ -29,8 +33,7 @@ public class ScribeApplication extends Application implements Navigator {
     public void onCreate() {
         super.onCreate();
         objectGraph = ObjectGraph.create(getModules().toArray());
-        sessionLoader = new SessionLoader();
-        inject(sessionLoader);
+        inject(this);
     }
 
     public ObjectGraph getObjectGraph() {
@@ -65,15 +68,19 @@ public class ScribeApplication extends Application implements Navigator {
         return modules;
     }
 
-    public InputMethodService getInputMethodService() {
+    public MainInputService getInputMethodService() {
         if (currentInputMethodService == null) {
             throw new IllegalStateException("No registered input method.");
         }
         return currentInputMethodService;
     }
 
-    public void registerInputMethodService(InputMethodService ims) {
+    public void registerInputMethodService(MainInputService ims) {
         this.currentInputMethodService = ims;
+    }
+
+    public void unregisterInputMethodService() {
+        currentInputMethodService = null;
     }
 
     public static ScribeApplication get(Context context) {
