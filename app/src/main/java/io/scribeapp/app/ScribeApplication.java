@@ -2,7 +2,6 @@ package io.scribeapp.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.inputmethodservice.InputMethodService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,7 @@ public class ScribeApplication extends Application implements Navigator {
 
     @Inject
     SessionLoader sessionLoader;
-    private MainInputService currentInputMethodService;
+    private MainInputService inputServiceInstance;
 
     public static ScribeApplication from(Context context) {
         return (ScribeApplication) context.getApplicationContext();
@@ -69,18 +68,18 @@ public class ScribeApplication extends Application implements Navigator {
     }
 
     public MainInputService getInputMethodService() {
-        if (currentInputMethodService == null) {
+        if (inputServiceInstance == null) {
             throw new IllegalStateException("No registered input method.");
         }
-        return currentInputMethodService;
+        return inputServiceInstance;
     }
 
     public void registerInputMethodService(MainInputService ims) {
-        this.currentInputMethodService = ims;
+        this.inputServiceInstance = ims;
     }
 
     public void unregisterInputMethodService() {
-        currentInputMethodService = null;
+        inputServiceInstance = null;
     }
 
     public static ScribeApplication get(Context context) {

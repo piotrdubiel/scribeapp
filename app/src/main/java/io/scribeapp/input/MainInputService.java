@@ -50,7 +50,7 @@ public class MainInputService extends RegistrableInputMethodService implements O
      */
     @Override
     public void onCreate() {
-            super.onCreate();
+        super.onCreate();
         Log.d("Modules", Arrays.toString(getModules().toArray()));
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         loadPreferences();
@@ -207,5 +207,9 @@ public class MainInputService extends RegistrableInputMethodService implements O
 
     public SuggestionView getSuggestionView() {
         return suggestionView;
+    }
+
+    public BaseInputMethod getCurrentInputMethod() {
+        return currentInputMethod;
     }
 }

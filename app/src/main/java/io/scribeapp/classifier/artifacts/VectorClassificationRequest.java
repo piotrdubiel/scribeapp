@@ -3,7 +3,6 @@ package io.scribeapp.classifier.artifacts;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 
 /**
  * Created by piotrekd on 17/03/14.

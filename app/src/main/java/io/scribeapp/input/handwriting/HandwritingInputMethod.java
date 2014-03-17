@@ -32,9 +32,8 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
     private static final String TAG = "GestureInput";
     final StateChanger<RecognitionState> stateChanger;
 
-    @InjectView(R.id.deleteKey)
-    ImageButton deleteKey;
-    ImageButton enterKey;
+    @InjectView(R.id.deleteKey) ImageButton deleteKey;
+    @InjectView(R.id.enterKey) ImageButton enterKey;
     ImageButton spaceKey;
     KeyboardView supportSymbolKeyboardView;
     GestureOverlayView gestureView;
@@ -64,7 +63,6 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
         gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
         Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
         stateChanger = new StateChanger<RecognitionState>(service);
-        stateChanger.setState(new IdleState());
     }
 
     @Override
@@ -90,6 +88,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
 
         supportSymbolKeyboardView.setOnKeyboardActionListener(new SymbolProcessor());
         supportSymbolKeyboardView.setKeyboard(new Keyboard(service, R.xml.symbols));
+        stateChanger.setState(new IdleState());
     }
 
     /**

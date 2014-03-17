@@ -73,7 +73,11 @@ public class HerokuConnector implements ServiceConnector {
     @Override
     public ClassificationResult recognize(ClassificationRequest request) throws RecognitionException {
         try {
-            HttpResponse response = RequestHandler.request(URI + "recognize", request.toByteArray(), navigator.getSession().token);
+            final Session session = navigator.getSession();
+            if (session == null) {
+                throw new RecognitionException();
+            }
+            HttpResponse response = RequestHandler.request(URI + "pca/recognize", request.toByteArray(), session.token);
             int status = response.getStatusLine().getStatusCode();
             if (status == HttpStatus.SC_OK) {
                 return new ClassificationResult(RequestHandler.readResponse(response));
