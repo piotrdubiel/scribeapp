@@ -95,6 +95,7 @@ public class RequestHandler {
         while ((line = reader.readLine()) != null) {
             data_builder.append(line);
         }
-        return data_builder.toString();
+        final String s = data_builder.toString();
+        return s;
     }
 }

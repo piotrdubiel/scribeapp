@@ -1,8 +1,11 @@
 package io.scribeapp.classifier.artifacts;
 
+import android.util.Log;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by piotrekd on 17/03/14.
@@ -12,6 +15,7 @@ public class VectorClassificationRequest extends ClassificationRequest {
 
     public VectorClassificationRequest(float[] vector) {
         this.vector = vector;
+        Log.d("A", Arrays.toString(vector));
     }
 
     @Override

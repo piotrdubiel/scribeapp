@@ -285,7 +285,7 @@ public class CandidateView extends View {
     public void takeSuggestionAt(float x) {
         mTouchX = (int) x;
         // To detect candidate
-        onDraw(null);
+        draw(null);
         if (selectedIndex >= 0) {
         	service.pickSuggestion(mSuggestions.get(selectedIndex));
         }

@@ -23,11 +23,10 @@ import io.scribeapp.connection.utils.RequestHandler;
  */
 @Singleton
 public class HerokuConnector implements ServiceConnector {
-    private String URI = "http://scribe-server.herokuapp.com/api/";
+    private final static String URI = "http://scribe-server.herokuapp.com/api/";
+    //private String URI = "http://192.168.43.215:5000/api/";
     @Inject
     Navigator navigator;
-
-    public HerokuConnector() {}
 
     @Override
     public Session login(String username, String password) throws LoginException {

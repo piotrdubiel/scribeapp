@@ -1,6 +1,8 @@
 language: java
 jdk: oraclejdk7
 env:
+  global:
+    - TERM=dumb
   matrix:
     - ANDROID_SDKS=android-19,sysimg-19  ANDROID_TARGET=android-19  ANDROID_ABI=armeabi-v7a
 before_install:

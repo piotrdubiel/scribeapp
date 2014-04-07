@@ -29,7 +29,6 @@ public class ClassificationHandler {
         try {
             return remoteClassifier.classify(gesture).toString();
         } catch (RecognitionException e) {
-            Log.e("HANDLER", e.getMessage());
             return "None";
         }
 
