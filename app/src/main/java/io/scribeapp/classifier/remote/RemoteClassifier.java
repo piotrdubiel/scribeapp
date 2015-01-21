@@ -3,6 +3,7 @@ package io.scribeapp.classifier.remote;
 import android.content.Context;
 import android.gesture.Gesture;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -10,23 +11,18 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.scribeapp.classifier.Classifier;
-import io.scribeapp.classifier.artifacts.ClassificationRequest;
-import io.scribeapp.classifier.artifacts.ClassificationResult;
-import io.scribeapp.classifier.artifacts.VectorClassificationRequest;
+import io.scribeapp.classifier.model.ClassificationResult;
+import io.scribeapp.classifier.model.GestureClassificationRequest;
 import io.scribeapp.classifier.utils.PCA;
 import io.scribeapp.classifier.utils.Utils;
-import io.scribeapp.connection.ServiceConnector;
-import io.scribeapp.connection.exceptions.RecognitionException;
+import io.scribeapp.connection.APIService;
 
-/**
- * Created by piotrekd on 11/22/13.
- */
 @Singleton
 public class RemoteClassifier implements Classifier {
     private PCA pca;
 
     @Inject
-    ServiceConnector serviceConnector;
+    APIService apiService;
 
     @Inject
     public RemoteClassifier(Context context) {
@@ -38,8 +34,15 @@ public class RemoteClassifier implements Classifier {
     }
 
     @Override
-    public ClassificationResult classify(Gesture gesture) throws RecognitionException {
-        return serviceConnector.recognize(new VectorClassificationRequest(prepare(gesture)));
+    public ClassificationResult classify(Gesture gesture) {
+        try {
+            return apiService.recognize(new GestureClassificationRequest(gesture));
+        }
+        catch (Exception err) {
+            Log.e("RETROFIT", err.getMessage());
+        }
+        return null;
+        //return serviceConnector.recognize(new VectorClassificationRequest(prepare(gesture)));
     }
 
     @Override
@@ -57,8 +60,7 @@ public class RemoteClassifier implements Classifier {
         if (in == null) return null;
         if (in.getWidth() > in.getHeight()) {
             in = Bitmap.createScaledBitmap(in, 20, Math.max(20 * in.getHeight() / in.getWidth(), 1), true);
-        }
-        else {
+        } else {
             in = Bitmap.createScaledBitmap(in, Math.max(20 * in.getWidth() / in.getHeight(), 1), 20, true);
         }
 

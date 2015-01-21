@@ -10,9 +10,6 @@ import io.scribeapp.classifier.remote.RemoteClassifier;
 import io.scribeapp.classifier.utils.Meta;
 import io.scribeapp.classifier.utils.Remote;
 
-/**
- * Created by piotrekd on 12/29/13.
- */
 @Module(library = true, addsTo = ApplicationModule.class)
 public class ClassifierModule {
     @Provides

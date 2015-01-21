@@ -7,15 +7,14 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.scribeapp.classifier.meta.MetaClassifier;
+import io.scribeapp.classifier.model.ClassificationRequest;
+import io.scribeapp.classifier.model.ClassificationResult;
 import io.scribeapp.classifier.remote.RemoteClassifier;
 import io.scribeapp.classifier.utils.Meta;
 import io.scribeapp.classifier.utils.PCA;
 import io.scribeapp.classifier.utils.Remote;
 import io.scribeapp.connection.exceptions.RecognitionException;
 
-/**
- * Created by piotrek on 30.11.13.
- */
 @Singleton
 public class ClassificationHandler {
     @Inject
@@ -23,15 +22,14 @@ public class ClassificationHandler {
     @Inject
     public MetaClassifier metaClassifier;
 
-    //public ClassificationHandler() {}
+    public ClassificationHandler() {
+    }
 
     public String classify(Gesture gesture) {
-        try {
-            return remoteClassifier.classify(gesture).toString();
-        } catch (RecognitionException e) {
-            return "None";
+        ClassificationResult classify = remoteClassifier.classify(gesture);
+        if (classify != null) {
+            return classify.toString();
         }
-
-
+        return null;
     }
 }

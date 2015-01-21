@@ -3,9 +3,8 @@ package io.scribeapp.classifier.gesture;
 import java.util.ArrayList;
 
 import io.scribeapp.classifier.Classifier;
-import io.scribeapp.classifier.artifacts.ClassificationResult;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
+import io.scribeapp.classifier.model.LabelClassificationResult;
+import io.scribeapp.classifier.model.LabelClassificationResult.Label;
 
 import android.content.Context;
 import android.gesture.Gesture;
@@ -53,7 +52,7 @@ public class GestureLibraryClassifier implements Classifier {
 	}
 
     @Override
-    public ClassificationResult classify(Gesture gesture) {
+    public io.scribeapp.classifier.model.ClassificationResult classify(Gesture gesture) {
         return null;
     }
 

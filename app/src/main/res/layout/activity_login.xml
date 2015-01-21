@@ -4,6 +4,5 @@
     android:orientation="horizontal"
     android:id="@+id/id_login_fragment_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    style="@style/Theme.Base.AppCompat.Light">
+    android:layout_height="match_parent">
 </FrameLayout>

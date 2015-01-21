@@ -20,23 +20,23 @@ public class IdleState extends RecognitionState implements GestureOverlayView.On
         super.onStateEnter(service);
 
 
-        registrationFragment = (RegistrationFragment) registrationActivity.getCurrentFragment();
-        registrationFragment.errorLabel.setVisibility(View.VISIBLE);
-        registrationFragment.errorLabel.setText(reason);
-
-        registrationFragment.registerButton.setOnClickListener(this);
+//        registrationFragment = (RegistrationFragment) registrationActivity.getCurrentFragment();
+//        registrationFragment.errorLabel.setVisibility(View.VISIBLE);
+//        registrationFragment.errorLabel.setText(reason);
+//
+//        registrationFragment.registerButton.setOnClickListener(this);
     }
 
     @Override
-    public void onStateLeave(RegistrationActivity registrationActivity) {
-        super.onStateLeave(registrationActivity);
-        registrationFragment.errorLabel.setVisibility(View.INVISIBLE);
-        registrationFragment.errorLabel.setText(U.EMPTY);
+    public void onStateLeave(InputMethodService service) {
+//        super.onStateLeave(registrationActivity);
+//        registrationFragment.errorLabel.setVisibility(View.INVISIBLE);
+//        registrationFragment.errorLabel.setText(U.EMPTY);
     }
 
     @Override
     public void onGestureStarted(GestureOverlayView overlay, MotionEvent event) {
-        inputMethod.setButtonsState(false);
+//        inputMethod.setButtonsState(false);
     }
 
     @Override

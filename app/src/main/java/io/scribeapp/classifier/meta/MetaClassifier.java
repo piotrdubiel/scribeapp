@@ -6,13 +6,12 @@ import io.scribeapp.R;
 import io.scribeapp.classifier.Classifier;
 import io.scribeapp.classifier.ann.Network;
 import io.scribeapp.classifier.ann.NetworkImpl;
-import io.scribeapp.classifier.artifacts.ClassificationResult;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
+import io.scribeapp.classifier.model.ClassificationResult;
+import io.scribeapp.classifier.model.LabelClassificationResult;
+import io.scribeapp.classifier.model.LabelClassificationResult.Label;
 import io.scribeapp.classifier.gesture.GestureLibraryClassifier;
 import io.scribeapp.classifier.utils.PCA;
 import io.scribeapp.classifier.utils.Utils;
-import io.scribeapp.utils.inject.ForContext;
 
 import android.content.Context;
 import android.gesture.Gesture;

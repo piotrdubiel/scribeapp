@@ -14,9 +14,6 @@ import javax.inject.Inject;
 
 import io.scribeapp.connection.Session;
 
-/**
- * Created by piotrekd on 1/4/14.
- */
 public class SessionLoader {
     @Inject
     Context context;

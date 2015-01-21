@@ -10,6 +10,10 @@ import android.util.Log;
 import android.util.Pair;
 import android.view.KeyEvent;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,6 +30,8 @@ public class Utils {
 	public static final char[] LETTERS = { 'a', '\u0105', 'b', 'c', '\u0107', 'd', 'e', '\u0119', 'f', 'g', 'h',
 			'i', 'j', 'k', 'l', '\u0142', 'm', 'n', '\u0144', 'o', '\u00F3', 'p', 'q', 'r', 's', '\u015B', 't', 'u',
 			'v', 'w', 'x', 'y', 'z', '\u017A', '\u017C' };
+
+
 
 	public static List<Gesture> getAllPossibleGestures(Gesture g) {
 		List<Gesture> gestures = new ArrayList<Gesture>();

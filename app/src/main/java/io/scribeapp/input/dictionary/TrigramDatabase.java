@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import io.scribeapp.input.Utils;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
+import io.scribeapp.classifier.model.LabelClassificationResult.Label;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

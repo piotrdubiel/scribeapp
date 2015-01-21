@@ -13,9 +13,6 @@ import io.scribeapp.connection.Session;
 import io.scribeapp.input.MainInputService;
 import io.scribeapp.utils.SessionLoader;
 
-/**
- * Created by piotrekd on 12/28/13.
- */
 public class ScribeApplication extends Application implements Navigator {
     private ObjectGraph objectGraph;
     private Session session;

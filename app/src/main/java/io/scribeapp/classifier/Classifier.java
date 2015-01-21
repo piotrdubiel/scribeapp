@@ -2,7 +2,7 @@ package io.scribeapp.classifier;
 
 import android.gesture.Gesture;
 
-import io.scribeapp.classifier.artifacts.ClassificationResult;
+import io.scribeapp.classifier.model.ClassificationResult;
 import io.scribeapp.connection.exceptions.RecognitionException;
 
 public interface Classifier {

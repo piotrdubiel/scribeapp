@@ -4,10 +4,7 @@ import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
-import io.scribeapp.classifier.ClassificationHandler;
-import io.scribeapp.classifier.ClassifierModule;
-import io.scribeapp.classifier.remote.RemoteClassifier;
-import io.scribeapp.connection.ConnectionModule;
+import io.scribeapp.connection.APIModule;
 import io.scribeapp.input.InputModule;
 import io.scribeapp.input.MainInputService;
 import io.scribeapp.input.handwriting.HandwritingInputMethod;
@@ -19,7 +16,6 @@ import io.scribeapp.settings.account.state.LoggingState;
 import io.scribeapp.settings.registration.activity.RegistrationActivity;
 import io.scribeapp.settings.registration.state.RegisteringState;
 import io.scribeapp.utils.SessionLoader;
-import io.scribeapp.utils.inject.ForContext;
 
 /**
  * Created by piotrekd on 12/28/13.
@@ -27,7 +23,7 @@ import io.scribeapp.utils.inject.ForContext;
 @Module(
         complete = false,
         includes = {
-                ConnectionModule.class,
+                APIModule.class,
                 InputModule.class
         },
         injects = {

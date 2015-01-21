@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.scribeapp.classifier.Classifier;
-import io.scribeapp.classifier.artifacts.ClassificationResult;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult;
+import io.scribeapp.classifier.model.ClassificationResult;
+import io.scribeapp.classifier.model.LabelClassificationResult;
 import io.scribeapp.classifier.utils.Utils;
-import io.scribeapp.classifier.artifacts.LabelClassificationResult.Label;
+import io.scribeapp.classifier.model.LabelClassificationResult.Label;
 
 import android.content.Context;
 import android.gesture.Gesture;

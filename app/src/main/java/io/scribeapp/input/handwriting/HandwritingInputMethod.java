@@ -62,7 +62,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
         gestureInterval = Integer.parseInt(sharedPrefs.getString("gesture_interval", "300"));
         Log.d(TAG, "Interval preference: " + String.valueOf(gestureInterval));
-        stateChanger = new StateChanger<RecognitionState>(service);
+        stateChanger = new StateChanger<>(service);
     }
 
     @Override
