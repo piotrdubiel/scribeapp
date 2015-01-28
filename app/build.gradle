@@ -16,6 +16,8 @@ dependencies {
     compile 'com.squareup.retrofit:retrofit:1.8.0'
     compile 'com.google.code.gson:gson:2.3'
     compile 'de.tavendo:autobahn-android:0.5.2-SNAPSHOT'
+    compile 'io.reactivex:rxjava:1.0.4'
+    compile 'io.reactivex:rxandroid:0.24.0'
 
 //    def nativeLibs = new File("$buildDir/native-libs")
 //    if (!nativeLibs.exists()) {
