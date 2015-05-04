@@ -8,6 +8,7 @@ import java.lang.reflect.Type
 public class ClassificationRequestSerializer : JsonSerializer<ClassificationRequest> {
 
     override fun serialize(src: ClassificationRequest, typeOfSrc: Type, context: JsonSerializationContext): JsonElement {
+        System.out.println(src.toJson())
         return src.toJson()
     }
 }

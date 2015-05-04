@@ -15,7 +15,9 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import kotlinx.websocket.*;
 
+import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Inject;
 
@@ -23,11 +25,12 @@ import butterknife.InjectView;
 import io.scribe.R;
 import io.scribe.classifier.ClassificationHandler;
 import io.scribe.classifier.Classifier;
+import io.scribe.classifier.WebsocketRecognitionHandler;
 import io.scribe.connection.APIService;
 import io.scribe.input.BaseInputMethod;
 import io.scribe.input.handwriting.state.IdleState;
 import io.scribe.input.handwriting.state.RecognitionState;
-import io.scribe.classifier.RecognitionHandler;
+import io.scribe.classifier.RestRecognitionHandler;
 import io.scribe.settings.SettingsActivity;
 import io.scribe.utils.state.StateChanger;
 
@@ -58,7 +61,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
     @Inject
     APIService api;
 
-    RecognitionHandler recognitionHandler;
+    WebsocketRecognitionHandler recognitionHandler;
 
     @Inject
     public HandwritingInputMethod(Context context) {
@@ -89,16 +92,24 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
         spaceKey.setOnClickListener(this);
         keyboardSwitch.setOnClickListener(this);
 
-        gestureView.addOnGestureListener(new WordRecognizer(this));
+//        gestureView.addOnGestureListener(new WordRecognizer(this));
         gestureView.setGestureStrokeLengthThreshold(0.0f);
         gestureView.setGestureStrokeType(GestureOverlayView.GESTURE_STROKE_TYPE_MULTIPLE);
         gestureView.setFadeOffset(gestureInterval);
 
-        recognitionHandler = new RecognitionHandler(this, api, gestureView);
+//        recognitionHandler = new RestRecognitionHandler(this, api, gestureView);
+        recognitionHandler = new WebsocketRecognitionHandler(gestureView);
+        recognitionHandler.start();
+
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         supportSymbolKeyboardView.setOnKeyboardActionListener(new SymbolProcessor());
         supportSymbolKeyboardView.setKeyboard(new Keyboard(service, R.xml.symbols));
-        stateChanger.setState(new IdleState());
+//        stateChanger.setState(new IdleState());
     }
 
     /**

@@ -1,1 +1,1 @@
-include ':app', ':cnn', ':state-machine'
+include ':app', ':cnn', ':state-machine', ':ws'

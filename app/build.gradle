@@ -2,11 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 dependencies {
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.10.195'
+    compile project(':ws')
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.11.91.2'
 
-    compile 'com.android.support:support-v4:21.0.3'
-    compile 'com.android.support:appcompat-v7:21.0.3'
+    compile 'com.android.support:support-v4:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.jakewharton:butterknife:4.0.1'
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
@@ -15,7 +16,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
     compile 'com.squareup.retrofit:retrofit:1.8.0'
     compile 'com.google.code.gson:gson:2.3'
-    compile 'de.tavendo:autobahn-android:0.5.2-SNAPSHOT'
     compile 'io.reactivex:rxjava:1.0.4'
     compile 'io.reactivex:rxandroid:0.24.0'
 
@@ -32,10 +32,14 @@ dependencies {
 //        testCompile 'com.squareup:fest-android:1.0.+'
 //        testCompile 'org.mockito:mockito-all:1.9.+'
 //
-    androidTestCompile 'junit:junit:4.12'
-    androidTestCompile 'org.robolectric:robolectric:2.1.1'
-    androidTestCompile 'com.squareup:fest-android:1.0.8'
-    androidTestCompile 'org.mockito:mockito-all:1.9.5'
+
+
+    testCompile 'junit:junit:4.12'
+
+//    androidTestCompile 'junit:junit:4.12'
+//    androidTestCompile 'org.robolectric:robolectric:2.1.1'
+//    androidTestCompile 'com.squareup:fest-android:1.0.8'
+//    androidTestCompile 'org.mockito:mockito-all:1.9.5'
 }
 
 
@@ -50,6 +54,9 @@ android {
 
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
     }
 
     lintOptions {
@@ -62,6 +69,8 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        main.java.srcDirs        += 'src/main/kotlin'
+        test.java.srcDirs        += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 }

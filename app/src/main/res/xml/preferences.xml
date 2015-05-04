@@ -6,7 +6,7 @@
         android:title="@string/recognition_cat_title" >
         <PreferenceScreen
             android:title="@string/preferences_login_lb" >
-            <intent android:action="io.scribeapp.settings.account.activity.AccountActivity" />
+            <intent android:action="io.scribe.settings.account.activity.AccountActivity" />
         </PreferenceScreen>
 
         <ListPreference

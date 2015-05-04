@@ -1,26 +1,33 @@
 package io.scribe.input;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import butterknife.ButterKnife;
-import dagger.ObjectGraph;
 import io.scribe.app.ScribeApplication;
 
 public abstract class BaseInputMethod {
 
     public MainInputService service;
     public View inputView;
-    private ObjectGraph objectGraph;
-    private int viewId;
+    private int layoutId;
+    private LayoutInflater inflater;
 
-    public BaseInputMethod(Context context, int viewId) {
-        this.viewId = viewId;
+    public BaseInputMethod(Context context, LayoutInflater inflater, int layoutId) {
         service = ScribeApplication.get(context).getInputMethodService();
+        this.layoutId = layoutId;
+        this.inflater = inflater;
+    }
+
+    public BaseInputMethod(Context context, int layoutId) {
+        service = ScribeApplication.get(context).getInputMethodService();
+        this.layoutId = layoutId;
+        this.inflater = service.getLayoutInflater();
     }
 
     public void onCreateView() {
-        inputView = service.getLayoutInflater().inflate(viewId, null);
+        inputView = inflater.inflate(layoutId, null);
         ButterKnife.inject(this, inputView);
     }
 

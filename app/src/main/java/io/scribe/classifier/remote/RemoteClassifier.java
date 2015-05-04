@@ -3,7 +3,6 @@ package io.scribe.classifier.remote;
 import android.content.Context;
 import android.gesture.Gesture;
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import java.io.IOException;
 
@@ -12,7 +11,6 @@ import javax.inject.Singleton;
 
 import io.scribe.classifier.Classifier;
 import io.scribe.classifier.model.ClassificationResult;
-import io.scribe.classifier.model.GestureClassificationRequest;
 import io.scribe.classifier.utils.PCA;
 import io.scribe.classifier.utils.Utils;
 import io.scribe.connection.APIService;

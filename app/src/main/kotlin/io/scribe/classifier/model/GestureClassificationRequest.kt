@@ -25,7 +25,7 @@ public class GestureClassificationRequest(public var gesture: Gesture) : Classif
 
             val timestamps = extractTimestamp(stroke)
 
-            for (i in 0..stroke.points.size() step 2) {
+            for (i in 0..stroke.points.size() - 1 step 2) {
                 val point = JsonObject()
                 point.addProperty("x", stroke.points[i])
                 point.addProperty("y", stroke.points[i + 1])

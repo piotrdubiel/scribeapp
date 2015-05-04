@@ -7,11 +7,11 @@ import io.scribe.classifier.model.GestureClassificationRequest
 import java.util.concurrent.TimeUnit
 import io.scribe.rx.GestureViewObservable
 
-public class RecognitionHandler(inputMethod: HandwritingInputMethod, api: APIService, view: GestureOverlayView) {
+public class RestRecognitionHandler(inputMethod: HandwritingInputMethod, api: APIService, view: GestureOverlayView) {
     {
         GestureViewObservable.gestures(view)
                 .sample(10, TimeUnit.MILLISECONDS)
-                .flatMap { result -> api?.recognize(GestureClassificationRequest(result.view!!.getGesture())) }
+                .flatMap { result -> api.recognize(GestureClassificationRequest(result.gesture)) }
                 .subscribe({ result -> inputMethod.enterWord(result.word) })
     }
 }

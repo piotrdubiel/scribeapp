@@ -10,12 +10,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import de.tavendo.autobahn.WebSocketConnection;
-import de.tavendo.autobahn.WebSocketException;
 import io.scribe.classifier.model.ClassificationRequestSerializer;
 import io.scribe.classifier.model.GestureClassificationRequest;
 import io.scribe.classifier.model.VectorClassificationRequest;
-import io.scribe.classifier.remote.ClassifierConnectionHandler;
 import retrofit.Endpoint;
 import retrofit.Endpoints;
 import retrofit.ErrorHandler;
@@ -25,9 +22,6 @@ import retrofit.client.OkClient;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
 
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.internal.ws.WebSocket;
-
 @Module(
         library = true,
         complete = false
@@ -36,8 +30,8 @@ public class APIModule {
     //private final static String API_URL = "http://scribe-server.herokuapp.com";
     public static final String API_DOMAIN = "10.0.3.34:5000";
     private final static String API_URL = "http://" + API_DOMAIN;
-    //    private final static String WEBSOCKET_URL = "ws://" + API_DOMAIN + "/ws/recognition";
-    private final static String WEBSOCKET_URL = "ws://echo.websocket.org";
+    public final static String WEBSOCKET_URL = "ws://" + API_DOMAIN + "/ws/recognize";
+//    private final static String WEBSOCKET_URL = "ws://echo.websocket.org";
 
     @Provides
     @Singleton
@@ -97,32 +91,5 @@ public class APIModule {
     @Singleton
     APIService provideAPIService(RestAdapter restAdapter) {
         return restAdapter.create(APIService.class);
-    }
-
-    @Provides
-    @Singleton
-    WebSocket provideWebSocket(OkHttpClient okHttpClient) {
-        Request request = new Request.Builder()
-                .url(WEBSOCKET_URL)
-                .build();
-        return WebSocket.newWebSocket(okHttpClient, request);
-    }
-
-    @Provides
-    @Singleton
-    ClassifierConnectionHandler provideWebSocketConnectionHandler() {
-        return new ClassifierConnectionHandler();
-    }
-
-    @Provides
-    @Singleton
-    WebSocketConnection provideWebSocketConnection(ClassifierConnectionHandler webSocketConnectionHandler) {
-        WebSocketConnection webSocketConnection = new WebSocketConnection();
-        try {
-            webSocketConnection.connect(WEBSOCKET_URL, webSocketConnectionHandler);
-        } catch (WebSocketException e) {
-            e.printStackTrace();
-        }
-        return webSocketConnection;
     }
 }
