@@ -61,17 +61,17 @@
 //    @Test
 //    public void shouldLoadSession() throws IOException {
 //        when(sessionLoader.context.openFileInput(Config.SESSION_FILENAME))
-//                .thenReturn(new FileInputStream(prepareFile(new String[]{"username", "token"})));
+//                .thenReturn(new FileInputStream(prepareFile(new String[]{"username", "login"})));
 //        Session session = sessionLoader.load();
 //        assertNotNull(session);
 //        assertEquals("username", session.username);
-//        assertEquals("token", session.token);
+//        assertEquals("login", session.login);
 //    }
 //
 //    @Test
 //    public void shouldSaveSessionOnExisting() throws IOException {
 //        when(sessionLoader.context.openFileOutput(Config.SESSION_FILENAME, Context.MODE_PRIVATE))
-//                .thenReturn(new FileOutputStream(prepareFile(new String[]{"username", "token"})));
+//                .thenReturn(new FileOutputStream(prepareFile(new String[]{"username", "login"})));
 //        Session session = new Session("test", "abc");
 //        sessionLoader.save(session);
 //

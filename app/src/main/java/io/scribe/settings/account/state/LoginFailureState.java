@@ -3,7 +3,7 @@ package io.scribe.settings.account.state;
 import android.view.View;
 
 import io.scribe.R;
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.settings.account.fragment.LoginFragment;
 import io.scribe.settings.account.state.generic.AccountState;
 
@@ -26,8 +26,8 @@ public class LoginFailureState extends AccountState implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.id_login_fragment_container) {
-            stateContext.setState(new IdleState());
-        }
+//        if (v.getId() == R.id.id_login_fragment_container) {
+//            stateContext.setState(new IdleState());
+//        }
     }
 }

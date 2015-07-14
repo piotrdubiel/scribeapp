@@ -12,9 +12,6 @@ import butterknife.InjectView;
 import io.scribe.R;
 import io.scribe.utils.fragment.BaseFragment;
 
-/**
- * Created by piotrekd on 1/5/14.
- */
 public class LoginFragment extends BaseFragment {
     @InjectView(R.id.id_et_login_email)
     public EditText emailField;
@@ -27,6 +24,6 @@ public class LoginFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_login, null);
+        return inflater.inflate(R.layout.activity_login, null);
     }
 }

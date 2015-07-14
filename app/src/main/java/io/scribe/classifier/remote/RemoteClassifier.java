@@ -13,14 +13,14 @@ import io.scribe.classifier.Classifier;
 import io.scribe.classifier.model.ClassificationResult;
 import io.scribe.classifier.utils.PCA;
 import io.scribe.classifier.utils.Utils;
-import io.scribe.connection.APIService;
+import io.scribe.connection.ApiService;
 
 @Singleton
 public class RemoteClassifier implements Classifier {
     private PCA pca;
 
     @Inject
-    APIService apiService;
+    ApiService apiService;
 
     @Inject
     public RemoteClassifier(Context context) {

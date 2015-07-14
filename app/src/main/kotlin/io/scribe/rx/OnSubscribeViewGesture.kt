@@ -32,7 +32,6 @@ public class OnSubscribeViewGesture(val view: GestureOverlayView) : Observable.O
             if (gesture != null) {
                 Log.d("GestureObserver", "Gesture completed")
                 subscriber.onNext(OnGestureEvent(gesture))
-                subscriber.onCompleted()
             }
         }
 

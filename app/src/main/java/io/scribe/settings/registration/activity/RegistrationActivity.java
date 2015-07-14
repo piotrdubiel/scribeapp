@@ -35,11 +35,6 @@ public class RegistrationActivity extends InjectFragmentActivity<BaseFragment> {
         stateChanger.setState(new IdleState());
     }
 
-    @Override
-    protected List<Object> getModules() {
-        return U.NO_MODULES;
-    }
-
     public void setState(RegistrationState state) {
         stateChanger.setState(state);
     }

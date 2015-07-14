@@ -6,7 +6,7 @@ import io.scribe.app.Navigator;
 import io.scribe.connection.ServiceConnector;
 import io.scribe.connection.Session;
 import io.scribe.connection.utils.ConnectionListener;
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.settings.account.async.LoginAsyncTask;
 import io.scribe.settings.account.fragment.LoginFragment;
 import io.scribe.settings.account.state.generic.AccountState;
@@ -24,7 +24,7 @@ public class LoggingState extends AccountState implements Lockable, ConnectionLi
     @Override
     public void onStateEnter(AccountActivity stateContext) {
         super.onStateEnter(stateContext);
-        stateContext.inject(this);
+//        stateContext.inject(this);
         loginFragment = (LoginFragment) stateContext.getCurrentFragment();
         String username = loginFragment.emailField.getText().toString();
         String password = loginFragment.passwordField.getText().toString();

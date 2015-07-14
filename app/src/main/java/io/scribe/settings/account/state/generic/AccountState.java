@@ -1,6 +1,6 @@
 package io.scribe.settings.account.state.generic;
 
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.utils.state.State;
 
 /**

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import io.scribe.R;
 import io.scribe.app.Navigator;
 import io.scribe.connection.Session;
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.settings.account.fragment.LogoutFragment;
 import io.scribe.settings.account.state.generic.AccountState;
 import io.scribe.utils.fragment.FragmentViewCreatedListener;
@@ -25,7 +25,7 @@ public class LoggedInState extends AccountState implements View.OnClickListener,
     @Override
     public void onStateEnter(AccountActivity loginActivity) {
         super.onStateEnter(loginActivity);
-        stateContext.inject(this);
+//        stateContext.inject(this);
         logoutFragment = new LogoutFragment();
         stateContext.changeFragment(logoutFragment);
         logoutFragment.setFragmentViewCreatedListener(this);
@@ -47,6 +47,6 @@ public class LoggedInState extends AccountState implements View.OnClickListener,
         logoutFragment.logoutButton.setOnClickListener(this);
         logoutFragment.logoutButton.setEnabled(true);
 
-        //logoutFragment.imageView.setImageBitmap(GravatarUtility.hash(session.token));
+        //logoutFragment.imageView.setImageBitmap(GravatarUtility.hash(session.login));
     }
 }

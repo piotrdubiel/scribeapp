@@ -8,7 +8,7 @@ import io.scribe.app.Navigator;
 import io.scribe.connection.ServiceConnector;
 import io.scribe.connection.Session;
 import io.scribe.connection.utils.ConnectionListener;
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.settings.account.state.generic.Lockable;
 import io.scribe.settings.registration.activity.RegistrationActivity;
 import io.scribe.settings.registration.async.RegisterAsyncTask;
@@ -30,7 +30,7 @@ public class RegisteringState extends RegistrationState implements Lockable, Con
     @Override
     public void onStateEnter(RegistrationActivity stateContext) {
         super.onStateEnter(stateContext);
-        stateContext.inject(this);
+//        stateContext.inject(this);
         registrationFragment = (RegistrationFragment) stateContext.getCurrentFragment();
         String username = registrationFragment.emailField.getText().toString();
         String password = registrationFragment.passwordField.getText().toString();

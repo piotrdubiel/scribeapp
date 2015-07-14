@@ -3,14 +3,12 @@ package io.scribe.input;
 import dagger.Module;
 import dagger.Provides;
 import io.scribe.app.ScribeApplication;
+import io.scribe.utils.inject.RegistrableInputMethodService;
 
-@Module(
-        library = true,
-        complete = false
-)
+@Module
 public class InputModule {
     @Provides
-    MainInputService provideInputMethodService(ScribeApplication application) {
+    RegistrableInputMethodService provideInputMethodService(ScribeApplication application) {
         return application.getInputMethodService();
     }
 }

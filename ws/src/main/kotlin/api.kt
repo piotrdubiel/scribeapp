@@ -38,7 +38,7 @@ public trait JetSocketBuilderWithWriter<O> : JetSocketBuilder {
 
 public trait JetSocketDuplex<I, O> : JetSocketBuilderWithReader<I>, JetSocketBuilderWithWriter<O> {}
 
-data class JetSocketInput<I, O>(val client: OkHttpClient, override val request: Request) : JetSocketBuilder, JetSocketBuilderWithReader<I>, JetSocketBuilderWithWriter<O> {
+data class JetSocketInput<I, O>(val client: OkHttpClient, override val request: Request) : JetSocketBuilder, JetSocketDuplex<I, O> {
     override var state: Observer<WebSocketState> = subscriber()
     override var reconnectOnEndOfStream : Boolean = true
     override var reconnectProvider : (Throwable) -> Observable<*> = {Observable.timer(10L, TimeUnit.SECONDS)}

@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.View;
 
 import io.scribe.R;
-import io.scribe.settings.account.activity.AccountActivity;
+import io.scribe.account.AccountActivity;
 import io.scribe.settings.account.fragment.LoginFragment;
 import io.scribe.settings.account.state.generic.AccountState;
 import io.scribe.settings.registration.activity.RegistrationActivity;

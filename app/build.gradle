@@ -1,21 +1,25 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'kotlin-android'
 
 dependencies {
     compile project(':ws')
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.11.91.2'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.12.200'
 
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.jakewharton:butterknife:4.0.1'
-    compile 'com.squareup.dagger:dagger:1.2.2'
-    provided 'com.squareup.dagger:dagger-compiler:1.2.2'
+
+    compile 'com.google.dagger:dagger:2.0'
+    apt 'com.google.dagger:dagger-compiler:2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 
     compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+    compile 'com.squareup.okhttp:okhttp-ws:2.3.0'
     compile 'com.squareup.retrofit:retrofit:1.8.0'
     compile 'com.google.code.gson:gson:2.3'
+    compile 'com.google.guava:guava:18.0'
     compile 'io.reactivex:rxjava:1.0.4'
     compile 'io.reactivex:rxandroid:0.24.0'
 
@@ -44,12 +48,12 @@ dependencies {
 
 
 android {
-    compileSdkVersion 21
+    compileSdkVersion 22
     buildToolsVersion '21.1.2'
 
     defaultConfig {
         minSdkVersion 21
-        targetSdkVersion 21
+        targetSdkVersion 22
     }
 
     packagingOptions {
@@ -69,8 +73,8 @@ android {
     }
 
     sourceSets {
-        main.java.srcDirs        += 'src/main/kotlin'
-        test.java.srcDirs        += 'src/test/kotlin'
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
         androidTest.java.srcDirs += 'src/androidTest/kotlin'
     }
 }

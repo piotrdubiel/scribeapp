@@ -15,9 +15,6 @@ import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.widget.ImageButton;
 import android.widget.Toast;
-import kotlinx.websocket.*;
-
-import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Inject;
 
@@ -26,11 +23,9 @@ import io.scribe.R;
 import io.scribe.classifier.ClassificationHandler;
 import io.scribe.classifier.Classifier;
 import io.scribe.classifier.WebsocketRecognitionHandler;
-import io.scribe.connection.APIService;
+import io.scribe.connection.ApiService;
 import io.scribe.input.BaseInputMethod;
-import io.scribe.input.handwriting.state.IdleState;
 import io.scribe.input.handwriting.state.RecognitionState;
-import io.scribe.classifier.RestRecognitionHandler;
 import io.scribe.settings.SettingsActivity;
 import io.scribe.utils.state.StateChanger;
 
@@ -59,7 +54,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
     public ClassificationHandler classificationHandler;
 
     @Inject
-    APIService api;
+    ApiService api;
 
     WebsocketRecognitionHandler recognitionHandler;
 
@@ -98,7 +93,7 @@ public class HandwritingInputMethod extends BaseInputMethod implements OnClickLi
         gestureView.setFadeOffset(gestureInterval);
 
 //        recognitionHandler = new RestRecognitionHandler(this, api, gestureView);
-        recognitionHandler = new WebsocketRecognitionHandler(gestureView);
+        recognitionHandler = new WebsocketRecognitionHandler(service, this, gestureView);
         recognitionHandler.start();
 
 //        try {

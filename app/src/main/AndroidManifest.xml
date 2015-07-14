@@ -11,10 +11,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="@string/ime_name"
-        android:name="io.scribe.app.ScribeApplication"
+        android:name=".app.ScribeApplication"
+        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:allowBackup="true">
+        android:label="@string/ime_name"
+        android:theme="@style/AppTheme">
         <service
             android:name="io.scribe.input.MainInputService"
             android:permission="android.permission.BIND_INPUT_METHOD">
@@ -31,9 +32,9 @@
             android:name="io.scribe.settings.SettingsActivity"
             android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
             </intent-filter>
-            </activity>
+        </activity>
         <activity
             android:name="io.scribe.settings.TrainGesturesActivity"
             android:label="@string/app_name">
@@ -43,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.scribe.settings.account.activity.AccountActivity"
+            android:name=".account.AccountActivity"
             android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="io.scribe.settings.account.activity.AccountActivity" />
@@ -51,9 +52,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="io.scribe.settings.registration.activity.RegistrationActivity"
-            android:label="@string/title_activity_registration">
+            android:name=".account.LoginActivity"
+            android:label="@string/title_activity_login" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
         </activity>
+        <activity
+            android:name="io.scribe.settings.registration.activity.RegistrationActivity"
+            android:label="@string/title_activity_registration" />
     </application>
 
 </manifest>

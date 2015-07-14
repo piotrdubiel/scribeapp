@@ -33,7 +33,7 @@ public class HerokuConnector implements ServiceConnector {
         headers.put("Authorization", authorizationString);
 
         try {
-            HttpResponse response = RequestHandler.request(URI + "token", null, null, headers);
+            HttpResponse response = RequestHandler.request(URI + "login", null, null, headers);
             int status = response.getStatusLine().getStatusCode();
             if (status == HttpStatus.SC_OK) {
                 String token = RequestHandler.readResponse(response);

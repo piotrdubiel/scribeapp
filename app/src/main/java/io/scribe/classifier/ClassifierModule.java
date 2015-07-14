@@ -10,7 +10,7 @@ import io.scribe.classifier.remote.RemoteClassifier;
 import io.scribe.classifier.utils.Meta;
 import io.scribe.classifier.utils.Remote;
 
-@Module(library = true, addsTo = ApplicationModule.class)
+@Module
 public class ClassifierModule {
     @Provides
     @Singleton

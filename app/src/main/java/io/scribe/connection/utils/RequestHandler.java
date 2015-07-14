@@ -30,7 +30,7 @@ import io.scribe.utils.Config;
 public class RequestHandler {
     public static HttpResponse request(String uri, HashMap<String, String> data, String token, HashMap<String, String> headers) throws IOException {
         if (token != null) {
-            data.put("token", token);
+            data.put("login", token);
         }
 
         JSONObject json = new JSONObject();
@@ -66,7 +66,7 @@ public class RequestHandler {
         JSONObject json = new JSONObject();
         try {
             if (token != null) {
-                json.put("token", token);
+                json.put("login", token);
             }
             json.put("data", image_b64);
         } catch (JSONException e) {

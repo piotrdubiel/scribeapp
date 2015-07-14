@@ -15,14 +15,13 @@ public abstract class BaseInputMethod {
     private LayoutInflater inflater;
 
     public BaseInputMethod(Context context, LayoutInflater inflater, int layoutId) {
-        service = ScribeApplication.get(context).getInputMethodService();
         this.layoutId = layoutId;
         this.inflater = inflater;
     }
 
     public BaseInputMethod(Context context, int layoutId) {
-        service = ScribeApplication.get(context).getInputMethodService();
         this.layoutId = layoutId;
+        this.service = (MainInputService) ((ScribeApplication) context.getApplicationContext()).getInputMethodService();
         this.inflater = service.getLayoutInflater();
     }
 

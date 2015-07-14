@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.scribe.app.ScribeApplication;
 import io.scribe.input.handwriting.HandwritingInputMethod;
 import io.scribe.input.keyboard.KeyboardInputMethod;
 import io.scribe.input.suggestions.SuggestionView;
@@ -56,6 +57,7 @@ public class MainInputService extends RegistrableInputMethodService implements O
         loadPreferences();
         //trigram_database = new TrigramDatabase(this);
         composer = new Composer(this);
+        ScribeApplication.Companion.component(this).inject(this);
     }
 
     /**
